@@ -24,7 +24,7 @@ exports.up = function (db) {
         primaryKey: true,
         unsigned: true,
       },
-      correctAnswer: { type: 'int', notNull: true, defaultValue: 0 },
+      correctAnswer: { type: 'int', notNull: true },
       answer: { type: 'string', notNull: true },
       quizId: {
         type: 'int',
