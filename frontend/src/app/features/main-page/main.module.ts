@@ -10,4 +10,4 @@ import { MainRoutingModule } from './main-routing.module';
     CommonModule, MainRoutingModule, SharedModule
   ]
 })
-export class MainModule { }
+export class MainModule {}

@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'quizes', pathMatch: 'full' },
-
+  { path: '', redirectTo: 'quizzes', pathMatch: 'full' },
+  {
+    path: 'quizzes',
+    loadChildren: () =>
+      import('../app/features/main-page/main.module').then((m) => m.MainModule),
+  },
 ];
 
 @NgModule({

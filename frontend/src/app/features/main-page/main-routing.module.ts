@@ -7,8 +7,8 @@ const routes: Routes = [
     path: '',
     component: MainPageComponent,
     children: [
-      { path: '', redirectTo: 'quizes', pathMatch: 'full' },
-    ],
+      { path: 'make-quiz'}
+    ]
   },
 ];
 

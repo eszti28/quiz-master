@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 98%;
+    height: 65px;
+    padding: 0 15px;
+    background-color: rgb(250, 242, 242);
+    color: rgb(19, 2, 2);
+    justify-content: space-between;
+    align-items: center;
+    border-style: outset none;
+    border-color: rgb(249, 238, 224);
+    font-size: 18px;
+
+    .page-name, .logout > p {
+    color: rgb(215, 44, 44);
+    font-size: 22px;
+    }
+
+    .page-name {
+      font-weight: bolder;
+      font-size: 25px;
+    }
+
+    .categories {
+      display: flex;
+
+      p {
+        padding: 10px;
+      }
+
+    }
+  }
