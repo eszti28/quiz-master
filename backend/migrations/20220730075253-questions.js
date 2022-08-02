@@ -24,6 +24,7 @@ exports.up = function (db) {
         primaryKey: true,
         unsigned: true,
       },
+      title: { type: 'string', notNull: true },
       question: { type: 'string', notNull: true },
       category: { type: 'string', notNull: true },
       userId: {

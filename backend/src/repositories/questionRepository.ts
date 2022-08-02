@@ -3,11 +3,12 @@ import { db } from "../data/connections";
 import { QuestionDomainModel } from "../models/domain/QuestionDomainModel";
 
 export const questionRepository = {
-    async addNewQuestion(question: string, category: string): Promise<void> {
-        const query: string = `INSERT INTO questions (question, category, userId) VALUES (?, ?, ?);`;
+    async addNewQuestion(title: string, question: string, category: string): Promise<void> {
+        const query: string = `INSERT INTO questions (title, question, category, userId) VALUES (?, ?, ?, ?);`;
     
         await db.query<QuestionDomainModel[]>(query, [
-            question, category, `${1}`       ]);
+            title, question, category, `${3}`
+                 ]);
       },
 
       async getMaxQuestionId(): Promise<number> {
@@ -18,9 +19,18 @@ export const questionRepository = {
         return maxId[0].id;
       },
 
-    async addAnswersToQuestion(correctAnswer: number, answer: string, quizId: number,): Promise<void> {
-        const query: string = `INSERT INTO answers (correctAnswer, answer, quizId) VALUES (?, ?, ?);`
+    async addAnswersToQuestion(correctAnswers: number[], answers: string[], quizId: number,): Promise<void> {
+        const query: string = `INSERT INTO answers (correctAnswer, answer, quizId) VALUES 
+        (?, ?, ?), 
+        (?, ?, ?),
+        (?, ?, ?),
+        (?, ?, ?);`
         
-        await db.query<OkPacket>(query, [`${correctAnswer}`, answer, quizId.toString()]);
+        await db.query<OkPacket>(query, [
+          `${correctAnswers[0]}`, answers[0], quizId.toString(),
+          `${correctAnswers[1]}`, answers[1], quizId.toString(),
+          `${correctAnswers[2]}`, answers[2], quizId.toString(),
+          `${correctAnswers[3]}`, answers[3], quizId.toString(),
+        ]);
     }
 }
