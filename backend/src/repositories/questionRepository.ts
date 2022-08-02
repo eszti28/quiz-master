@@ -12,12 +12,12 @@ export const questionRepository = {
                  ]);
       },
 
-      async getMaxQuestionId(): Promise<number> {
-        const query: string = `SELECT MAX(id) as id FROM questions;`
+      async getNewestQuiz(): Promise<QuizMainPageViewModel> {
+        const query: string = `SELECT MAX(id) as id, title, question, userId FROM questions;`
 
-        const maxId = await db.query<{id: number}[]>(query);
+        const maxId = await db.query<QuizMainPageViewModel[]>(query);
 
-        return maxId[0].id;
+        return maxId[0];
       },
 
     async addAnswersToQuestion(correctAnswers: number[], answers: string[], quizId: number,): Promise<void> {

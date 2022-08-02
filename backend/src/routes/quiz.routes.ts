@@ -3,7 +3,9 @@ import { quizController } from "../controllers/quizController";
 
 const quizRouter = express.Router();
 
-quizRouter.get('/main-info', quizController.getMainInfo)
+quizRouter.get('/newest-quiz', quizController.getNewestQuiz);
+
+quizRouter.get('/main-info', quizController.getMainInfo);
 
 quizRouter.put('/new-quiz', quizController.addNewQuiz);
 

@@ -9,12 +9,14 @@ import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageVi
 })
 export class MainPageComponent implements OnInit {
   quizzes: QuizMainPageViewModel[] = [];
+  newestQuiz: QuizMainPageViewModel;
 
   constructor(private quizService: QuizService) { }
 
   ngOnInit(): void {
     this.quizService.getQuizMainInfo().subscribe(x => 
-      this.quizzes = x)
-  }
+      this.quizzes = x);
 
+    this.quizService.getNewestQuiz().subscribe(x => console.log(x));
+  }
 }

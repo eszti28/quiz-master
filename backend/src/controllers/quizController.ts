@@ -28,5 +28,14 @@ export const quizController = {
       } catch (err) {
         next(err);
       }
+    },
+
+    async getNewestQuiz(req: Request, res: Response, next: NextFunction) {
+      try {
+        const newestQuiz = await quizService.getNewestQuiz();
+        res.status(200).send(newestQuiz);
+      } catch (err) {
+        next(err);
+      }
     }
 };
