@@ -3,6 +3,8 @@ import { quizController } from "../controllers/quizController";
 
 const quizRouter = express.Router();
 
-quizRouter.put('/new-quiz', quizController.addNewQuiz)
+quizRouter.get('/main-info', quizController.getMainInfo)
+
+quizRouter.put('/new-quiz', quizController.addNewQuiz);
 
 export default quizRouter;

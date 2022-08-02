@@ -6,3 +6,8 @@
     </div>
     <h2>Test your knowledge with our quizzes</h2>
 </div>
+<div class="quiz-container">
+    <div class="quiz" *ngFor="let quiz of quizzes">
+      <app-quiz-list [quizData]="quiz"></app-quiz-list>
+    </div>
+  </div>

@@ -1,6 +1,7 @@
 import { OkPacket } from "mysql";
 import { db } from "../data/connections";
 import { QuestionDomainModel } from "../models/domain/QuestionDomainModel";
+import { QuizMainPageViewModel } from "../models/view/QuizMainPageViewModel";
 
 export const questionRepository = {
     async addNewQuestion(title: string, question: string, category: string): Promise<void> {
@@ -32,5 +33,10 @@ export const questionRepository = {
           `${correctAnswers[2]}`, answers[2], quizId.toString(),
           `${correctAnswers[3]}`, answers[3], quizId.toString(),
         ]);
+    },
+
+    async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
+      const query: string = `SELECT title, category, userId from questions;`
+      return await db.query<QuizMainPageViewModel[]>(query);
     }
 }

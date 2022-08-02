@@ -20,4 +20,13 @@ export const quizController = {
           next(err);
         }
       },
+
+    async getMainInfo(req: Request, res: Response, next: NextFunction) {
+      try {
+        const quizMainInfo = await quizService.getQuizMainInfo();
+        res.status(200).send(quizMainInfo);
+      } catch (err) {
+        next(err);
+      }
+    }
 };
