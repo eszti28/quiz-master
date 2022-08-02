@@ -5,18 +5,19 @@ import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageVi
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent implements OnInit {
   quizzes: QuizMainPageViewModel[] = [];
   newestQuiz: QuizMainPageViewModel;
 
-  constructor(private quizService: QuizService) { }
+  constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
-    this.quizService.getQuizMainInfo().subscribe(x => 
-      this.quizzes = x);
+    this.quizService.getQuizMainInfo().subscribe((x) => {
+      this.quizzes = x;
+    });
 
-    this.quizService.getNewestQuiz().subscribe(x => console.log(x));
+    this.quizService.getNewestQuiz().subscribe((x) => (this.newestQuiz = x));
   }
 }

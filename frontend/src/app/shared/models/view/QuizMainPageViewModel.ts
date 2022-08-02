@@ -1,5 +1,6 @@
 export interface QuizMainPageViewModel {
-    title: string;
-    category: string;
-    userId: string;
+  id: number;
+  title: string;
+  category: string;
+  userId: string;
 }

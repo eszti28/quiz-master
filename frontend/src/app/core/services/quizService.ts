@@ -21,5 +21,4 @@ export class QuizService {
       `${environment.apiUrl}/quizzes/newest-quiz`
     );
   }
-
 }
