@@ -17,11 +17,8 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.quizService.getQuizMainInfo().subscribe((x) => {
       this.quizzes = x;
-    });
-
-    this.quizService.getNewestQuiz().subscribe((x) => {
-      this.newestQuiz = x;
-      this.imageURL = `../../../assets/${x.category}.png`;
+      this.newestQuiz = x[0];
+      this.imageURL = `../../../assets/${x[0].category}.png`;
     });
   }
 }

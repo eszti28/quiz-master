@@ -1,9 +1,7 @@
-import express from "express";
-import { quizController } from "../controllers/quizController";
+import express from 'express';
+import { quizController } from '../controllers/quizController';
 
 const quizRouter = express.Router();
-
-quizRouter.get('/newest-quiz', quizController.getNewestQuiz);
 
 quizRouter.get('/main-info', quizController.getMainInfo);
 

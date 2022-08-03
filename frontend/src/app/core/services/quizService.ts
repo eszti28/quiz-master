@@ -15,10 +15,4 @@ export class QuizService {
       `${environment.apiUrl}/quizzes/main-info`
     );
   }
-
-  getNewestQuiz(): Observable<QuizMainPageViewModel> {
-    return this.http.get<QuizMainPageViewModel>(
-      `${environment.apiUrl}/quizzes/newest-quiz`
-    );
-  }
 }

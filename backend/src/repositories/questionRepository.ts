@@ -19,14 +19,6 @@ export const questionRepository = {
     ]);
   },
 
-  async getNewestQuiz(): Promise<QuizMainPageViewModel> {
-    const query: string = `SELECT id, title, category, userId from questions ORDER BY id DESC LIMIT 1;`;
-
-    const maxId = await db.query<QuizMainPageViewModel[]>(query);
-
-    return maxId[0];
-  },
-
   async addAnswersToQuestion(
     correctAnswers: number[],
     answers: string[],
@@ -55,7 +47,9 @@ export const questionRepository = {
   },
 
   async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
-    const query: string = `SELECT id, title, category, userId from questions ORDER BY id DESC;`;
+    const query: string = `SELECT questions.id AS id, title, category, users.userName AS userName from questions 
+    JOIN users ON questions.userId = users.id
+    ORDER BY questions.id DESC;`;
     return await db.query<QuizMainPageViewModel[]>(query);
   },
 };
