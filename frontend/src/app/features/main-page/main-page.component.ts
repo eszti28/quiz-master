@@ -10,6 +10,7 @@ import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageVi
 export class MainPageComponent implements OnInit {
   quizzes: QuizMainPageViewModel[] = [];
   newestQuiz: QuizMainPageViewModel;
+  imageURL: string;
 
   constructor(private quizService: QuizService) {}
 
@@ -18,6 +19,9 @@ export class MainPageComponent implements OnInit {
       this.quizzes = x;
     });
 
-    this.quizService.getNewestQuiz().subscribe((x) => (this.newestQuiz = x));
+    this.quizService.getNewestQuiz().subscribe((x) => {
+      this.newestQuiz = x;
+      this.imageURL = `../../../assets/${x.category}.png`;
+    });
   }
 }

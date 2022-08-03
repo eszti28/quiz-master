@@ -4,14 +4,15 @@ import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageVi
 @Component({
   selector: 'app-quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.scss']
+  styleUrls: ['./quiz-list.component.scss'],
 })
 export class QuizListComponent implements OnInit {
   @Input() quizData: QuizMainPageViewModel;
+  imageURL: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    this.imageURL = `../../../assets/${this.quizData.category}.png`;
   }
-
 }

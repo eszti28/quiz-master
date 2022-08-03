@@ -55,7 +55,7 @@ export const questionRepository = {
   },
 
   async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
-    const query: string = `SELECT title, category, userId from questions ORDER BY id DESC;`;
+    const query: string = `SELECT id, title, category, userId from questions ORDER BY id DESC;`;
     return await db.query<QuizMainPageViewModel[]>(query);
   },
 };

@@ -1,3 +1,7 @@
 <div class="main-container">
-  <p>{{ quizData.title }}</p>
+  <img [src]="imageURL" alt="quiz-category" />
+  <div class="info">
+    <p>{{ quizData.title }}</p>
+    <span>By {{ quizData.userId }}</span>
+  </div>
 </div>

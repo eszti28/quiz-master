@@ -1,13 +1,20 @@
 <app-header></app-header>
 <div class="quiz">
-    <div class="newest">
-        <img src="../../../assets/quiz-time.jpg" alt="new-quiz-picture">
+  <div class="newest">
+    <img src="../../../assets/quiz-time.jpg" alt="new-quiz-picture" />
+    <h3>Our newest quiz</h3>
+    <div class="newest-quiz">
+      <img [src]="imageURL" alt="quiz-category" />
+      <div class="info">
         <p>{{ newestQuiz.title }}</p>
-    </div>
-    <h2>Test your knowledge with our quizzes</h2>
-</div>
-<div class="quiz-container">
-    <div class="quiz" *ngFor="let quiz of quizzes">
-      <app-quiz-list [quizData]="quiz"></app-quiz-list>
+        <span>By {{ newestQuiz.userId }}</span>
+      </div>
     </div>
   </div>
+  <h2>Test your knowledge with our quizzes</h2>
+</div>
+<div class="quiz-container">
+  <div class="quiz" *ngFor="let quiz of quizzes">
+    <app-quiz-list [quizData]="quiz"></app-quiz-list>
+  </div>
+</div>
