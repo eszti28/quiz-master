@@ -7,4 +7,6 @@ quizRouter.get('/main-info', quizController.getMainInfo);
 
 quizRouter.put('/new-quiz', quizController.addNewQuiz);
 
+quizRouter.get('/:category', quizController.getQuizzesByCategory);
+
 export default quizRouter;

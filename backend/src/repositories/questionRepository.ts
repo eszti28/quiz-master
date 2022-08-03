@@ -52,4 +52,14 @@ export const questionRepository = {
     ORDER BY questions.id DESC;`;
     return await db.query<QuizMainPageViewModel[]>(query);
   },
+
+  async getQuizzesByCategory(
+    categoryType: string,
+  ): Promise<QuizMainPageViewModel[]> {
+    const query: string = `SELECT questions.id AS id, title, category, users.userName AS userName from questions 
+    JOIN users ON questions.userId = users.id
+    WHERE category = ?
+    ORDER BY questions.id DESC;`;
+    return await db.query<QuizMainPageViewModel[]>(query, [categoryType]);
+  },
 };

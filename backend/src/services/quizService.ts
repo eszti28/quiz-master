@@ -21,4 +21,10 @@ export const quizService = {
   async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
     return await questionRepository.getQuizMainInfo();
   },
+
+  async getQuizzesByCategory(
+    categoryType: string,
+  ): Promise<QuizMainPageViewModel[]> {
+    return await questionRepository.getQuizzesByCategory(categoryType);
+  },
 };

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { QuizService } from 'src/app/core/services/quizService';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
 
 @Component({
@@ -7,12 +8,13 @@ import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageVi
   styleUrls: ['./quiz-list.component.scss'],
 })
 export class QuizListComponent implements OnInit {
-  @Input() quizData: QuizMainPageViewModel;
-  imageURL: string;
+  quizzes: QuizMainPageViewModel[] = [];
 
-  constructor() {}
+  constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
-    this.imageURL = `../../../assets/${this.quizData.category}.png`;
+    this.quizService.getQuizMainInfo().subscribe((x) => {
+      this.quizzes = x;
+    });
   }
 }

@@ -8,7 +8,6 @@ import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageVi
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent implements OnInit {
-  quizzes: QuizMainPageViewModel[] = [];
   newestQuiz: QuizMainPageViewModel;
   imageURL: string;
 
@@ -16,7 +15,6 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizService.getQuizMainInfo().subscribe((x) => {
-      this.quizzes = x;
       this.newestQuiz = x[0];
       this.imageURL = `../../../assets/${x[0].category}.png`;
     });

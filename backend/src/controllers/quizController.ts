@@ -47,4 +47,16 @@ export const quizController = {
       next(err);
     }
   },
+
+  async getQuizzesByCategory(req: Request, res: Response, next: NextFunction) {
+    const { category } = req.params;
+    console.log(category);
+
+    try {
+      const result = await quizService.getQuizzesByCategory(category);
+      res.status(200).send(result);
+    } catch (err) {
+      next(err);
+    }
+  },
 };

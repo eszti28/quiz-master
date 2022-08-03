@@ -1,9 +1,10 @@
-.main-container {
+.quiz {
   display: flex;
   margin: 10px 30px;
   border: 2px solid rgba(28, 110, 164, 0.13);
   border-radius: 6px;
   padding: 5px;
+  cursor: pointer;
 
   img {
     width: 200px;

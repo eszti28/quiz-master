@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CategoryComponent } from './category/category.component';
 import { MainPageComponent } from './main-page.component';
+import { QuizListComponent } from './quiz-list/quiz-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MainPageComponent,
     children: [
-      { path: 'make-quiz'}
-    ]
+      { path: 'every-quiz', component: QuizListComponent },
+      { path: ':category', component: CategoryComponent },
+      { path: '', redirectTo: 'every-quiz', pathMatch: 'full' },
+    ],
   },
 ];
 
@@ -16,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule { }
+export class MainRoutingModule {}

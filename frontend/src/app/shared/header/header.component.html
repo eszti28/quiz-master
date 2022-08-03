@@ -1,14 +1,14 @@
 <div class="header">
-    <p class="page-name">EsztiFeed</p>
-    <div class="categories">
-        <p>Movies</p>
-        <p>History</p>
-        <p>Sport</p>
-    </div>
-    <div class="make-quiz">
-        <button routerLink="/make-quiz">Make your own quiz</button>
-    </div>
-    <div class="logout">
-        <p>Logout</p>
-    </div>
+  <p class="page-name">EsztiFeed</p>
+  <div class="categories">
+    <span (click)="appendQueryParams(CategoryType.Movies)">Movies</span>
+    <span (click)="appendQueryParams(CategoryType.History)">History</span>
+    <span (click)="appendQueryParams(CategoryType.Sport)">Sport</span>
+  </div>
+  <div class="make-quiz">
+    <button routerLink="/make-quiz">Make your own quiz</button>
+  </div>
+  <div class="logout">
+    <a href="">Logout</a>
+  </div>
 </div>
