@@ -1,5 +1,6 @@
 export enum CategoryType {
-    Movies = 1,
-    History,
-    Sport
-  }
+  All = 1,
+  Movies,
+  History,
+  Sport,
+}

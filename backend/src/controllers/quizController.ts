@@ -50,7 +50,6 @@ export const quizController = {
 
   async getQuizzesByCategory(req: Request, res: Response, next: NextFunction) {
     const { category } = req.params;
-    console.log(category);
 
     try {
       const result = await quizService.getQuizzesByCategory(category);

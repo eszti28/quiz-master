@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { QuizService } from 'src/app/core/services/quizService';
-import { CategoryType } from '../models/enums/CategoryType';
 
 @Component({
   selector: 'app-header',
@@ -9,19 +6,7 @@ import { CategoryType } from '../models/enums/CategoryType';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  CategoryType = CategoryType;
-
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private quizService: QuizService
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {}
-
-  appendQueryParams(categoryTypeId: number) {
-    this.router.navigate(['/quizzes'], {
-      queryParams: { category: `${CategoryType[categoryTypeId]}` },
-    });
-  }
 }

@@ -12,6 +12,13 @@
     </div>
   </div>
   <h2>Test your knowledge with our quizzes</h2>
+  <div class="categories">
+    <p>Categories:</p>
+    <span (click)="appendQueryParams(CategoryType.All)">All</span>
+    <span (click)="appendQueryParams(CategoryType.Movies)">Movies</span>
+    <span (click)="appendQueryParams(CategoryType.History)">History</span>
+    <span (click)="appendQueryParams(CategoryType.Sport)">Sport</span>
+  </div>
 </div>
 <div class="quiz-container">
   <router-outlet></router-outlet>

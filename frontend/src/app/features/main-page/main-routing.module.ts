@@ -9,9 +9,8 @@ const routes: Routes = [
     path: '',
     component: MainPageComponent,
     children: [
-      { path: 'every-quiz', component: QuizListComponent },
-      { path: ':category', component: CategoryComponent },
-      { path: '', redirectTo: 'every-quiz', pathMatch: 'full' },
+      { path: '', component: QuizListComponent },
+      { path: 'categories', component: CategoryComponent },
     ],
   },
 ];

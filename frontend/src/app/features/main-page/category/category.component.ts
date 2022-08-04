@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
 
@@ -10,7 +10,6 @@ import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageVi
 })
 export class CategoryComponent implements OnInit {
   quizzesByCategory: QuizMainPageViewModel[] = [];
-  myParam: string;
 
   constructor(
     private quizService: QuizService,
@@ -18,13 +17,18 @@ export class CategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.activatedRoute.params.subscribe((params: Params) => this.myParam = params['category']);
-    this.activatedRoute.queryParams.subscribe((params) => {
-      console.log(params['category']);
-      this.quizService.chooseCategory(params['category']);
+    this.activatedRoute.queryParamMap.subscribe((params) => {
+      if (params.get('category') === 'All') {
+        this.quizService.getQuizMainInfo().subscribe((x) => {
+          this.quizzesByCategory = x;
+        });
+      } else {
+        this.quizService
+          .chooseCategory(params.get('category'))
+          .subscribe((x) => {
+            this.quizzesByCategory = x;
+          });
+      }
     });
-    // this.quizService.getQuizMainInfo().subscribe((x) => {
-    //   this.quizzesByCategory = x;
-    // });
   }
 }
