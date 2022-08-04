@@ -1,9 +1,8 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connections';
 import { QuestionDomainModel } from '../models/domain/QuestionDomainModel';
-import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
 
-export const questionRepository = {
+export const addQuizRepository = {
   async addNewQuestion(
     title: string,
     question: string,
@@ -25,10 +24,10 @@ export const questionRepository = {
     quizId: number,
   ): Promise<void> {
     const query: string = `INSERT INTO answers (correctAnswer, answer, quizId) VALUES 
-        (?, ?, ?), 
-        (?, ?, ?),
-        (?, ?, ?),
-        (?, ?, ?);`;
+            (?, ?, ?), 
+            (?, ?, ?),
+            (?, ?, ?),
+            (?, ?, ?);`;
 
     await db.query<OkPacket>(query, [
       `${correctAnswers[0]}`,
@@ -44,22 +43,5 @@ export const questionRepository = {
       answers[3],
       quizId.toString(),
     ]);
-  },
-
-  async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
-    const query: string = `SELECT questions.id AS id, title, category, users.userName AS userName from questions 
-    JOIN users ON questions.userId = users.id
-    ORDER BY questions.id DESC;`;
-    return await db.query<QuizMainPageViewModel[]>(query);
-  },
-
-  async getQuizzesByCategory(
-    categoryType: string,
-  ): Promise<QuizMainPageViewModel[]> {
-    const query: string = `SELECT questions.id AS id, title, category, users.userName AS userName from questions 
-    JOIN users ON questions.userId = users.id
-    WHERE category = ?
-    ORDER BY questions.id DESC;`;
-    return await db.query<QuizMainPageViewModel[]>(query, [categoryType]);
   },
 };

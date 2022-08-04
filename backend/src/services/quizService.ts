@@ -1,5 +1,6 @@
 import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
-import { questionRepository } from '../repositories/questionRepository';
+import { addQuizRepository } from '../repositories/addQuizRepository';
+import { getQuizRepository } from '../repositories/getQuizRepository';
 
 export const quizService = {
   async addNewQuiz(
@@ -9,9 +10,9 @@ export const quizService = {
     answers: string[],
     correctAnswer: number[],
   ): Promise<void> {
-    await questionRepository.addNewQuestion(title, question, category);
-    const questionId = await questionRepository.getQuizMainInfo();
-    await questionRepository.addAnswersToQuestion(
+    await addQuizRepository.addNewQuestion(title, question, category);
+    const questionId = await getQuizRepository.getQuizMainInfo();
+    await addQuizRepository.addAnswersToQuestion(
       correctAnswer,
       answers,
       questionId[0].id,
@@ -19,12 +20,12 @@ export const quizService = {
   },
 
   async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
-    return await questionRepository.getQuizMainInfo();
+    return await getQuizRepository.getQuizMainInfo();
   },
 
   async getQuizzesByCategory(
     categoryType: string,
   ): Promise<QuizMainPageViewModel[]> {
-    return await questionRepository.getQuizzesByCategory(categoryType);
+    return await getQuizRepository.getQuizzesByCategory(categoryType);
   },
 };
