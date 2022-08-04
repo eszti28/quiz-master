@@ -1,21 +1,32 @@
+import { QuestionsToTitleViewModel } from '../models/view/QuestionsToTitleViewModel';
 import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
 import { addQuizRepository } from '../repositories/addQuizRepository';
 import { getQuizRepository } from '../repositories/getQuizRepository';
 
 export const quizService = {
-  async addNewQuiz(
+  async addNewTitle(
     title: string,
-    question: string,
     category: string,
+    userId: number,
+  ): Promise<void> {
+    await addQuizRepository.addNewTitle(title, category, userId);
+  },
+
+  async addNewQuestion(
+    titleId: number,
+    question: string,
     answers: string[],
     correctAnswer: number[],
   ): Promise<void> {
-    await addQuizRepository.addNewQuestion(title, question, category);
-    const questionId = await getQuizRepository.getQuizMainInfo();
+    const newQuestionId = await addQuizRepository.addAndGetNewQuestion(
+      question,
+      titleId,
+    );
+
     await addQuizRepository.addAnswersToQuestion(
       correctAnswer,
       answers,
-      questionId[0].id,
+      newQuestionId[0].id,
     );
   },
 
@@ -27,5 +38,11 @@ export const quizService = {
     categoryType: string,
   ): Promise<QuizMainPageViewModel[]> {
     return await getQuizRepository.getQuizzesByCategory(categoryType);
+  },
+
+  async getQuestionsToTitle(
+    titleId: number,
+  ): Promise<QuestionsToTitleViewModel[]> {
+    return await getQuizRepository.getQuestionsToTitle(titleId);
   },
 };

@@ -3,19 +3,34 @@ import { db } from '../data/connections';
 import { QuestionDomainModel } from '../models/domain/QuestionDomainModel';
 
 export const addQuizRepository = {
-  async addNewQuestion(
+  async addNewTitle(
     title: string,
-    question: string,
     category: string,
+    userId: number,
   ): Promise<void> {
-    const query: string = `INSERT INTO questions (title, question, category, userId) VALUES (?, ?, ?, ?);`;
+    const query: string = `INSERT INTO titles (title, category, userId) VALUES (?, ?, ?);`;
 
     await db.query<QuestionDomainModel[]>(query, [
       title,
-      question,
       category,
-      `${3}`,
+      userId.toString(),
     ]);
+  },
+
+  async addAndGetNewQuestion(
+    question: string,
+    titleId: number,
+  ): Promise<{ id: number }[]> {
+    const addNewQuestion: string = `INSERT INTO questions (question, titleId) VALUES (?, ?);`;
+
+    const getNewestQuestion: string = `SELECT MAX(id) AS id FROM questions;`;
+
+    await db.query<QuestionDomainModel[]>(addNewQuestion, [
+      question,
+      titleId.toString(),
+    ]);
+
+    return await db.query<{ id: number }[]>(getNewestQuestion);
   },
 
   async addAnswersToQuestion(

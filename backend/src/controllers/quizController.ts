@@ -2,11 +2,21 @@ import { NextFunction, Request, Response } from 'express';
 import { quizService } from '../services/quizService';
 
 export const quizController = {
-  async addNewQuiz(req: Request, res: Response, next: NextFunction) {
+  async addNewTitle(req: Request, res: Response, next: NextFunction) {
+    const { title, category, userId } = req.body;
+
+    try {
+      await quizService.addNewTitle(title, category, userId);
+      res.status(200).send();
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async addNewQuestion(req: Request, res: Response, next: NextFunction) {
     const {
-      title,
+      titleId,
       question,
-      category,
       answerOne,
       correctAnswerOne,
       answerTwo,
@@ -26,10 +36,9 @@ export const quizController = {
     ];
 
     try {
-      await quizService.addNewQuiz(
-        title,
+      await quizService.addNewQuestion(
+        titleId,
         question,
-        category,
         answers,
         correctAnswers,
       );

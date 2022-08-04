@@ -5,7 +5,9 @@ const quizRouter = express.Router();
 
 quizRouter.get('/main-info', quizController.getMainInfo);
 
-quizRouter.put('/new-quiz', quizController.addNewQuiz);
+quizRouter.put('/new-title', quizController.addNewTitle);
+
+quizRouter.put('/new-question', quizController.addNewQuestion);
 
 quizRouter.get('/category/:category', quizController.getQuizzesByCategory);
 
