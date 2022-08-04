@@ -1,0 +1,28 @@
+.quiz {
+  display: flex;
+  margin: 10px 30px;
+  border: 2px solid rgba(28, 110, 164, 0.13);
+  border-radius: 6px;
+  padding: 5px;
+  cursor: pointer;
+
+  img {
+    width: 200px;
+    height: 130px;
+    margin: 10px;
+  }
+
+  .info {
+    margin: 20px 10px;
+    p {
+      font-size: 25px;
+      margin: 2px;
+    }
+
+    span {
+      font-size: 18px;
+      color: rgb(177, 177, 177);
+      margin-left: 4px;
+    }
+  }
+}
