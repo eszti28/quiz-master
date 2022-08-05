@@ -13,14 +13,14 @@ export const quizService = {
   },
 
   async addNewQuestion(
-    titleId: number,
     question: string,
     answers: string[],
     correctAnswer: number[],
   ): Promise<void> {
+    const maxTitleId = await getQuizRepository.getQuizMainInfo();
     const newQuestionId = await addQuizRepository.addAndGetNewQuestion(
       question,
-      titleId,
+      maxTitleId[0].id,
     );
 
     await addQuizRepository.addAnswersToQuestion(

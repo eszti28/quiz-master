@@ -4,6 +4,7 @@ import {
   FormArray,
   FormControl,
   FormGroup,
+  FormGroupDirective,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -44,6 +45,7 @@ export class NewQuestionComponent implements OnInit {
 
   addQuestion(): void {
     this.quizService.addNewQuestion(this.form).subscribe();
+    this.form.reset(' ');
   }
 
   doneQuiz(): void {

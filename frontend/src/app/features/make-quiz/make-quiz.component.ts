@@ -16,7 +16,9 @@ import { QuizService } from 'src/app/core/services/quizService';
 export class MakeQuizComponent implements OnInit {
   form = new FormGroup({
     title: new FormControl('', Validators.required),
+    selectFormControl: new FormControl('', Validators.required),
   });
+
   constructor(private quizService: QuizService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -25,8 +27,14 @@ export class MakeQuizComponent implements OnInit {
     return this.form.get('title');
   }
 
+  get selectFormControl(): AbstractControl {
+    return this.form.get('selectFormControl');
+  }
+
   addNewTitle(): void {
-    this.quizService.addNewTitle(this.title).subscribe();
+    this.quizService
+      .addNewTitle(this.title, this.selectFormControl)
+      .subscribe();
     this.router.navigate(['/make-quiz/new-question']);
   }
 }

@@ -25,12 +25,15 @@ export class QuizService {
     );
   }
 
-  addNewTitle(title: AbstractControl): Observable<addTitleRequestModel> {
+  addNewTitle(
+    title: AbstractControl,
+    selectFormControl: AbstractControl
+  ): Observable<addTitleRequestModel> {
     return this.http.post<addTitleRequestModel>(
       `${environment.apiUrl}/make-quiz/title`,
       {
         title: title.value,
-        category: 'Sport',
+        category: selectFormControl.value,
         userId: 2,
       }
     );
@@ -39,11 +42,9 @@ export class QuizService {
   addNewQuestion(
     form: AbstractControl
   ): Observable<AddNewQuestionRequestModel> {
-    console.log(form);
     return this.http.post<AddNewQuestionRequestModel>(
       `${environment.apiUrl}/make-quiz/new-question`,
       {
-        titleId: 4,
         question: form.value.question,
         answerOne: form.value.answerOne,
         correctAnswerOne: 1,

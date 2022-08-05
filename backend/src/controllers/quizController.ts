@@ -24,7 +24,6 @@ export const quizController = {
 
   async addNewQuestion(req: Request, res: Response, next: NextFunction) {
     const {
-      titleId,
       question,
       answerOne,
       correctAnswerOne,
@@ -44,12 +43,7 @@ export const quizController = {
     ];
 
     try {
-      await quizService.addNewQuestion(
-        titleId,
-        question,
-        answers,
-        correctAnswers,
-      );
+      await quizService.addNewQuestion(question, answers, correctAnswers);
       res.status(200).send();
     } catch (err) {
       next(err);
