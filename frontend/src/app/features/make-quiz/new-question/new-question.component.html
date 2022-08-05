@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="add-question">
+  <h2>Add new question</h2>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Question</mat-label>
+      <input matInput placeholder="Question" formControlName="question" />
+      <mat-error *ngIf="question.hasError('required')">
+        Question is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Answer 1</mat-label>
+      <input matInput placeholder="Answer1" formControlName="answerOne" />
+      <mat-error *ngIf="answerOne.hasError('required')">
+        Answer is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Answer 2</mat-label>
+      <input matInput placeholder="Answer2" formControlName="answerTwo" />
+      <mat-error *ngIf="answerTwo.hasError('required')">
+        Answer is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Answer 3</mat-label>
+      <input matInput placeholder="Answer3" formControlName="answerThree" />
+      <mat-error *ngIf="answerThree.hasError('required')">
+        Answer is required
+      </mat-error>
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button (click)="addQuestion()">
+        Add new question
+      </button>
+      <button mat-raised-button (click)="doneQuiz()">I'm done</button>
+    </div>
+  </form>
+</div>

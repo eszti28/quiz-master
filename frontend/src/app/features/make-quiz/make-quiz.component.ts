@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
 
 @Component({
@@ -16,7 +17,7 @@ export class MakeQuizComponent implements OnInit {
   form = new FormGroup({
     title: new FormControl('', Validators.required),
   });
-  constructor(private quizService: QuizService) {}
+  constructor(private quizService: QuizService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -26,5 +27,6 @@ export class MakeQuizComponent implements OnInit {
 
   addNewTitle(): void {
     this.quizService.addNewTitle(this.title).subscribe();
+    this.router.navigate(['/make-quiz/new-question']);
   }
 }

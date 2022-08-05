@@ -41,7 +41,6 @@ export const addQuizRepository = {
     const query: string = `INSERT INTO answers (correctAnswer, answer, quizId) VALUES 
             (?, ?, ?), 
             (?, ?, ?),
-            (?, ?, ?),
             (?, ?, ?);`;
 
     await db.query<OkPacket>(query, [
@@ -53,9 +52,6 @@ export const addQuizRepository = {
       quizId.toString(),
       `${correctAnswers[2]}`,
       answers[2],
-      quizId.toString(),
-      `${correctAnswers[3]}`,
-      answers[3],
       quizId.toString(),
     ]);
   },

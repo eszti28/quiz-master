@@ -1,0 +1,28 @@
+.add-question {
+  margin-top: 50px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.774);
+    border-radius: 2px;
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+
+      button {
+        margin: 20px;
+        background-color: #d23257;
+        color: #fff;
+      }
+    }
+  }
+}

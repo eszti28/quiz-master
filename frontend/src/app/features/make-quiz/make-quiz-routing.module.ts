@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MakeQuizComponent } from './make-quiz.component';
+import { NewQuestionComponent } from './new-question/new-question.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MakeQuizComponent,
-    // children: [
-    //   { path: '', component: QuizListComponent },
-    //   { path: 'categories', component: CategoryComponent },
-    // ],
   },
+  { path: 'new-question', component: NewQuestionComponent },
 ];
 
 @NgModule({

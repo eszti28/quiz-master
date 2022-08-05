@@ -32,18 +32,15 @@ export const quizController = {
       correctAnswerTwo,
       answerThree,
       correctAnswerThree,
-      answerFour,
-      correctAnswerFour,
     } = req.body;
 
     //errors
 
-    const answers: string[] = [answerOne, answerTwo, answerThree, answerFour];
+    const answers: string[] = [answerOne, answerTwo, answerThree];
     const correctAnswers: number[] = [
       correctAnswerOne,
       correctAnswerTwo,
       correctAnswerThree,
-      correctAnswerFour,
     ];
 
     try {
