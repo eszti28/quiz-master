@@ -8,8 +8,6 @@ import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [MainPageComponent, QuizListComponent, CategoryComponent],
-  imports: [
-    CommonModule, MainRoutingModule, SharedModule
-  ]
+  imports: [CommonModule, MainRoutingModule, SharedModule],
 })
 export class MainModule {}

@@ -5,6 +5,15 @@ export const quizController = {
   async addNewTitle(req: Request, res: Response, next: NextFunction) {
     const { title, category, userId } = req.body;
 
+    if (!title || !category) {
+      throw new Error('Every field is required');
+    }
+
+    //token
+    if (!userId) {
+      throw new Error('Invalid');
+    }
+
     try {
       await quizService.addNewTitle(title, category, userId);
       res.status(200).send();
@@ -26,6 +35,8 @@ export const quizController = {
       answerFour,
       correctAnswerFour,
     } = req.body;
+
+    //errors
 
     const answers: string[] = [answerOne, answerTwo, answerThree, answerFour];
     const correctAnswers: number[] = [
@@ -59,6 +70,10 @@ export const quizController = {
 
   async getQuizzesByCategory(req: Request, res: Response, next: NextFunction) {
     const { category } = req.params;
+
+    if (!category) {
+      throw new Error("You don't have a category selected");
+    }
 
     try {
       const result = await quizService.getQuizzesByCategory(category);
