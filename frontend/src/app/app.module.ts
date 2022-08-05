@@ -7,6 +7,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { MainPageComponent } from './features/main-page/main-page.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     BrowserModule,
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    BrowserAnimationsModule
   ],
   bootstrap: [AppComponent]
 })
