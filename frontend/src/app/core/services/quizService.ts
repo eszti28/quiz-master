@@ -47,11 +47,9 @@ export class QuizService {
       {
         question: form.value.question,
         answerOne: form.value.answerOne,
-        correctAnswerOne: 1,
         answerTwo: form.value.answerTwo,
-        correctAnswerTwo: 0,
         answerThree: form.value.answerThree,
-        correctAnswerThree: 0,
+        correctAnswer: form.value.radioFormControl,
       }
     );
   }

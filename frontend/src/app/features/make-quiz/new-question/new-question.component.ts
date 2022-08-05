@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  FormArray,
   FormControl,
   FormGroup,
-  FormGroupDirective,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,6 +19,7 @@ export class NewQuestionComponent implements OnInit {
     answerOne: new FormControl('', Validators.required),
     answerTwo: new FormControl('', Validators.required),
     answerThree: new FormControl('', Validators.required),
+    radioFormControl: new FormControl('', Validators.required),
   });
 
   constructor(private quizService: QuizService, private router: Router) {}
@@ -43,7 +42,12 @@ export class NewQuestionComponent implements OnInit {
     return this.form.get('answerOne');
   }
 
+  get radioFormControl(): AbstractControl {
+    return this.form.get('radioFormControl');
+  }
+
   addQuestion(): void {
+    console.log(this.form);
     this.quizService.addNewQuestion(this.form).subscribe();
     this.form.reset(' ');
   }

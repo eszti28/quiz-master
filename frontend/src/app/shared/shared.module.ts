@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -28,6 +29,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatRadioModule,
   ],
 
   exports: [
@@ -43,6 +45,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatRadioModule,
   ],
 })
 export class SharedModule {}
