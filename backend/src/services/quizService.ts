@@ -2,7 +2,7 @@ import { QuestionsToTitleViewModel } from '../models/view/QuestionsToTitleViewMo
 import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
 import { addQuizRepository } from '../repositories/addQuizRepository';
 import { getQuizRepository } from '../repositories/getQuizRepository';
-import { badRequestError, notFoundError } from './generalErrorService';
+import { notFoundError } from './generalErrorService';
 
 export const quizService = {
   async addNewTitle(
@@ -38,10 +38,6 @@ export const quizService = {
       if (!isCorrect) rigthCorrect.push(0);
       else rigthCorrect.push(1);
     });
-
-    if (rigthCorrect.length < 1) {
-      throw badRequestError('No correct answer given');
-    }
 
     await addQuizRepository.addAnswersToQuestion(
       rigthCorrect,

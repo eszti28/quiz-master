@@ -36,15 +36,7 @@ export const quizController = {
       isCorrectThree,
     } = req.body;
 
-    if (
-      !question ||
-      !answerOne ||
-      !isCorrectOne ||
-      !answerTwo ||
-      !isCorrectTwo ||
-      !answerThree ||
-      isCorrectThree
-    ) {
+    if (!question || !answerOne || !answerTwo || !answerThree) {
       next(badRequestError('Every field is required'));
       return;
     }
@@ -55,6 +47,20 @@ export const quizController = {
       isCorrectTwo,
       isCorrectThree,
     ];
+
+    if (!correctAnswers.includes(true)) {
+      next(badRequestError('No right answer given'));
+      return;
+    }
+
+    const filterCorrectAnswers = correctAnswers.filter(
+      isCorrect => isCorrect === true,
+    );
+
+    if (filterCorrectAnswers.length > 1) {
+      next(badRequestError('Only one answer can be right'));
+      return;
+    }
 
     try {
       await quizService.addNewQuestion(question, answers, correctAnswers);
