@@ -18,16 +18,29 @@ export const quizService = {
     correctAnswer: boolean[],
   ): Promise<void> {
     const maxTitleId = await getQuizRepository.getQuizMainInfo();
+
+    if (maxTitleId.length < 1) {
+      throw Error("There aren't any titles yet");
+    }
+
     const newQuestionId = await addQuizRepository.addAndGetNewQuestion(
       question,
       maxTitleId[0].id,
     );
+
+    if (newQuestionId.length < 1) {
+      throw Error("There aren't any questions yet");
+    }
 
     let rigthCorrect: number[] = [];
     correctAnswer.forEach(isCorrect => {
       if (!isCorrect) rigthCorrect.push(0);
       else rigthCorrect.push(1);
     });
+
+    if (rigthCorrect.length < 1) {
+      throw Error('No correct answer given');
+    }
 
     await addQuizRepository.addAnswersToQuestion(
       rigthCorrect,

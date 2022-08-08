@@ -1,17 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
+import { CategoryType } from '../models/enums/CategoryType';
 import { quizService } from '../services/quizService';
 
 export const quizController = {
   async addNewTitle(req: Request, res: Response, next: NextFunction) {
     const { title, category, userId } = req.body;
 
-    if (!title || !category) {
-      throw new Error('Every field is required');
+    if (!(category in CategoryType)) {
+      throw Error('Invalid category type');
     }
 
-    //token
-    if (!userId) {
-      throw new Error('Invalid');
+    if (!title || !category || !userId) {
+      throw Error('Every field is required');
     }
 
     try {
@@ -33,7 +33,18 @@ export const quizController = {
       isCorrectThree,
     } = req.body;
 
-    //errors
+    if (
+      !question ||
+      !answerOne ||
+      !isCorrectOne ||
+      !answerTwo ||
+      !isCorrectTwo ||
+      !answerThree ||
+      isCorrectThree
+    ) {
+      throw Error('Every field is required');
+    }
+
     const answers: string[] = [answerOne, answerTwo, answerThree];
     const correctAnswers: boolean[] = [
       isCorrectOne,
