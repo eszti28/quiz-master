@@ -10,11 +10,7 @@ export const addQuizRepository = {
   ): Promise<void> {
     const query: string = `INSERT INTO titles (title, category, userId) VALUES (?, ?, ?);`;
 
-    await db.query<QuestionDomainModel[]>(query, [
-      title,
-      category,
-      userId.toString(),
-    ]);
+    await db.query<OkPacket>(query, [title, category, userId.toString()]);
   },
 
   async addAndGetNewQuestion(
@@ -25,10 +21,7 @@ export const addQuizRepository = {
 
     const getNewestQuestion: string = `SELECT MAX(id) AS id FROM questions;`;
 
-    await db.query<QuestionDomainModel[]>(addNewQuestion, [
-      question,
-      titleId.toString(),
-    ]);
+    await db.query<OkPacket>(addNewQuestion, [question, titleId.toString()]);
 
     return await db.query<{ id: number }[]>(getNewestQuestion);
   },

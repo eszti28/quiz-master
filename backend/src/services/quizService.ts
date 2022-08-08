@@ -15,7 +15,7 @@ export const quizService = {
   async addNewQuestion(
     question: string,
     answers: string[],
-    correctAnswer: number[],
+    correctAnswer: boolean[],
   ): Promise<void> {
     const maxTitleId = await getQuizRepository.getQuizMainInfo();
     const newQuestionId = await addQuizRepository.addAndGetNewQuestion(
@@ -23,8 +23,14 @@ export const quizService = {
       maxTitleId[0].id,
     );
 
+    let rigthCorrect: number[] = [];
+    correctAnswer.forEach(isCorrect => {
+      if (!isCorrect) rigthCorrect.push(0);
+      else rigthCorrect.push(1);
+    });
+
     await addQuizRepository.addAnswersToQuestion(
-      correctAnswer,
+      rigthCorrect,
       answers,
       newQuestionId[0].id,
     );

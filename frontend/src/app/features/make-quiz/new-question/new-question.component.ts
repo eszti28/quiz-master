@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
   FormGroup,
+  FormGroupDirective,
+  NgForm,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
+import { AnswerAndIsCorrectViewModel } from 'src/app/shared/models/view/AnswerAndIsCorrectViewModel';
 
 @Component({
   selector: 'app-new-question',
@@ -35,11 +38,11 @@ export class NewQuestionComponent implements OnInit {
   }
 
   get answerTwo(): AbstractControl {
-    return this.form.get('answerOne');
+    return this.form.get('answerTwo');
   }
 
   get answerThree(): AbstractControl {
-    return this.form.get('answerOne');
+    return this.form.get('answerThree');
   }
 
   get radioFormControl(): AbstractControl {
@@ -47,9 +50,22 @@ export class NewQuestionComponent implements OnInit {
   }
 
   addQuestion(): void {
-    console.log(this.form);
-    this.quizService.addNewQuestion(this.form).subscribe();
-    this.form.reset(' ');
+    const result: AnswerAndIsCorrectViewModel[] = [
+      {
+        answer: this.answerOne.value,
+        isCorrect: this.radioFormControl.value === '1',
+      },
+      {
+        answer: this.answerTwo.value,
+        isCorrect: this.radioFormControl.value === '2',
+      },
+      {
+        answer: this.answerThree.value,
+        isCorrect: this.radioFormControl.value === '3',
+      },
+    ];
+
+    this.quizService.addNewQuestion(this.question.value, result).subscribe();
   }
 
   doneQuiz(): void {

@@ -4,6 +4,7 @@ import { AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AddNewQuestionRequestModel } from 'src/app/shared/models/request/AddNewQuestionRequestModel';
 import { addTitleRequestModel } from 'src/app/shared/models/request/addTitleRequestModel';
+import { AnswerAndIsCorrectViewModel } from 'src/app/shared/models/view/AnswerAndIsCorrectViewModel';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
 import { environment } from 'src/environments/environment';
 
@@ -40,16 +41,19 @@ export class QuizService {
   }
 
   addNewQuestion(
-    form: AbstractControl
+    question: string,
+    result: AnswerAndIsCorrectViewModel[]
   ): Observable<AddNewQuestionRequestModel> {
     return this.http.post<AddNewQuestionRequestModel>(
       `${environment.apiUrl}/make-quiz/new-question`,
       {
-        question: form.value.question,
-        answerOne: form.value.answerOne,
-        answerTwo: form.value.answerTwo,
-        answerThree: form.value.answerThree,
-        correctAnswer: form.value.radioFormControl,
+        question: question,
+        answerOne: result[0].answer,
+        isCorrectOne: result[0].isCorrect,
+        answerTwo: result[1].answer,
+        isCorrectTwo: result[1].isCorrect,
+        answerThree: result[2].answer,
+        isCorrectThree: result[2].isCorrect,
       }
     );
   }

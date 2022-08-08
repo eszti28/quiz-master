@@ -23,32 +23,23 @@ export const quizController = {
   },
 
   async addNewQuestion(req: Request, res: Response, next: NextFunction) {
-    const { question, answerOne, answerTwo, answerThree, correctAnswer } =
-      req.body;
+    const {
+      question,
+      answerOne,
+      isCorrectOne,
+      answerTwo,
+      isCorrectTwo,
+      answerThree,
+      isCorrectThree,
+    } = req.body;
 
-    let correctAnswerOne: number = 0;
-    let correctAnswerTwo: number = 0;
-    let correctAnswerThree: number = 0;
     //errors
-
-    if (correctAnswer === '1') {
-      correctAnswerOne = 1;
-    }
-    if (correctAnswer === '2') {
-      correctAnswerTwo = 1;
-    }
-    if (correctAnswer === '3') {
-      correctAnswerThree = 1;
-    }
-
     const answers: string[] = [answerOne, answerTwo, answerThree];
-    const correctAnswers: number[] = [
-      correctAnswerOne,
-      correctAnswerTwo,
-      correctAnswerThree,
+    const correctAnswers: boolean[] = [
+      isCorrectOne,
+      isCorrectTwo,
+      isCorrectThree,
     ];
-
-    console.log(correctAnswers);
 
     try {
       await quizService.addNewQuestion(question, answers, correctAnswers);
