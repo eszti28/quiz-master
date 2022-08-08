@@ -2,6 +2,7 @@ import { QuestionsToTitleViewModel } from '../models/view/QuestionsToTitleViewMo
 import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
 import { addQuizRepository } from '../repositories/addQuizRepository';
 import { getQuizRepository } from '../repositories/getQuizRepository';
+import { badRequestError, notFoundError } from './generalErrorService';
 
 export const quizService = {
   async addNewTitle(
@@ -20,7 +21,7 @@ export const quizService = {
     const maxTitleId = await getQuizRepository.getQuizMainInfo();
 
     if (maxTitleId.length < 1) {
-      throw Error("There aren't any titles yet");
+      throw notFoundError("There aren't any titles yet");
     }
 
     const newQuestionId = await addQuizRepository.addAndGetNewQuestion(
@@ -29,7 +30,7 @@ export const quizService = {
     );
 
     if (newQuestionId.length < 1) {
-      throw Error("There aren't any questions yet");
+      throw notFoundError("There aren't any questions yet");
     }
 
     let rigthCorrect: number[] = [];
@@ -39,7 +40,7 @@ export const quizService = {
     });
 
     if (rigthCorrect.length < 1) {
-      throw Error('No correct answer given');
+      throw badRequestError('No correct answer given');
     }
 
     await addQuizRepository.addAnswersToQuestion(

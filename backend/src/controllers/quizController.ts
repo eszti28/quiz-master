@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { CategoryType } from '../models/enums/CategoryType';
+import { badRequestError } from '../services/generalErrorService';
 import { quizService } from '../services/quizService';
 
 export const quizController = {
@@ -7,11 +8,13 @@ export const quizController = {
     const { title, category, userId } = req.body;
 
     if (!(category in CategoryType)) {
-      throw Error('Invalid category type');
+      next(badRequestError('Invalid category type'));
+      return;
     }
 
     if (!title || !category || !userId) {
-      throw Error('Every field is required');
+      next(badRequestError('Every field is required'));
+      return;
     }
 
     try {
@@ -42,7 +45,8 @@ export const quizController = {
       !answerThree ||
       isCorrectThree
     ) {
-      throw Error('Every field is required');
+      next(badRequestError('Every field is required'));
+      return;
     }
 
     const answers: string[] = [answerOne, answerTwo, answerThree];
@@ -72,8 +76,9 @@ export const quizController = {
   async getQuizzesByCategory(req: Request, res: Response, next: NextFunction) {
     const { category } = req.params;
 
-    if (!category) {
-      throw new Error("You don't have a category selected");
+    if (!(category in CategoryType)) {
+      next(badRequestError('Invalid category type'));
+      return;
     }
 
     try {
