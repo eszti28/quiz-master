@@ -6,6 +6,9 @@ export const getQuizRepository = {
   async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
     const query: string = `SELECT titles.id AS id, title, category, users.userName AS userName from titles 
     JOIN users ON titles.userId = users.id
+    JOIN questions ON titles.id = questions.titleId
+    WHERE LENGTH(question) > 0
+    GROUP BY titles.id
     ORDER BY titles.id DESC;`;
     return await db.query<QuizMainPageViewModel[]>(query);
   },
@@ -15,7 +18,9 @@ export const getQuizRepository = {
   ): Promise<QuizMainPageViewModel[]> {
     const query: string = `SELECT titles.id AS id, title, category, users.userName AS userName from titles 
     JOIN users ON titles.userId = users.id
-    WHERE category = ?
+    JOIN questions ON titles.id = questions.titleId
+    WHERE LENGTH(question) > 0 AND category = ?
+    GROUP BY titles.id
     ORDER BY titles.id DESC;`;
     return await db.query<QuizMainPageViewModel[]>(query, [categoryType]);
   },
