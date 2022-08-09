@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { CategoryType } from '../models/enums/CategoryType';
-import { badRequestError } from '../services/generalErrorService';
+import {
+  badRequestError,
+  notFoundError,
+} from '../services/generalErrorService';
 import { quizService } from '../services/quizService';
 
 export const quizController = {
@@ -96,7 +99,12 @@ export const quizController = {
   },
 
   async getQuestionsToTitle(req: Request, res: Response, next: NextFunction) {
-    const { titleId } = req.params;
+    const { titleId } = req.body;
+
+    if (!titleId) {
+      next(notFoundError('Title id required'));
+      return;
+    }
 
     try {
       const titleInfo = await quizService.getQuestionsToTitle(

@@ -2,7 +2,7 @@ import { QuestionsToTitleViewModel } from '../models/view/QuestionsToTitleViewMo
 import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
 import { addQuizRepository } from '../repositories/addQuizRepository';
 import { getQuizRepository } from '../repositories/getQuizRepository';
-import { notFoundError } from './generalErrorService';
+import { badRequestError, notFoundError } from './generalErrorService';
 
 export const quizService = {
   async addNewTitle(
@@ -59,6 +59,13 @@ export const quizService = {
   async getQuestionsToTitle(
     titleId: number,
   ): Promise<QuestionsToTitleViewModel[]> {
-    return await getQuizRepository.getQuestionsToTitle(titleId);
+    const requestedTitleId = await getQuizRepository.getQuestionsToTitle(
+      titleId,
+    );
+
+    if (requestedTitleId.length < 1) {
+      throw badRequestError('This title does not exist');
+    }
+    return requestedTitleId;
   },
 };
