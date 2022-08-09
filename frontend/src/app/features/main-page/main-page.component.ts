@@ -28,4 +28,10 @@ export class MainPageComponent implements OnInit {
       queryParams: { category: `${CategoryType[categoryTypeId]}` },
     });
   }
+
+  playNewestQuiz(title: string) {
+    this.router.navigate(['/play-quiz'], {
+      queryParams: { category: title },
+    });
+  }
 }

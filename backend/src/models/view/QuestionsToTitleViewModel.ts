@@ -1,6 +1,8 @@
 export interface QuestionsToTitleViewModel {
-  id: number;
-  question: string;
-  title: string;
   titleId: number;
+  title: string;
+  question: string;
+  answer: string;
+  correctAnswer: number;
+  questionId: number;
 }

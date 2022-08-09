@@ -28,10 +28,10 @@ export const getQuizRepository = {
   async getQuestionsToTitle(
     titleId: number,
   ): Promise<QuestionsToTitleViewModel[]> {
-    const query: string = `SELECT titles.id AS id, title, question, titleId from titles 
+    const query: string = `SELECT titles.id AS titleId, title, question, answer, correctAnswer, quizId AS questionId from titles 
     JOIN questions ON titles.id = questions.titleId
-    WHERE titleId = ?
-    ORDER BY titles.id DESC;`;
+    JOIN answers ON questions.id = answers.quizId
+    WHERE titleId = ?;`;
     return await db.query<QuestionsToTitleViewModel[]>(query, [
       titleId.toString(),
     ]);

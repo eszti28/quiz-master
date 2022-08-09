@@ -3,7 +3,7 @@
   <div class="newest">
     <img src="../../../assets/quiz-time.jpg" alt="new-quiz-picture" />
     <h3>Our newest quiz</h3>
-    <div class="newest-quiz">
+    <div class="newest-quiz" (click)="playNewestQuiz(newestQuiz.title)">
       <img [src]="imageURL" alt="quiz-category" />
       <div class="info">
         <p>{{ newestQuiz?.title }}</p>

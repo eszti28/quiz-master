@@ -94,4 +94,17 @@ export const quizController = {
       next(err);
     }
   },
+
+  async getQuestionsToTitle(req: Request, res: Response, next: NextFunction) {
+    const { titleId } = req.params;
+
+    try {
+      const titleInfo = await quizService.getQuestionsToTitle(
+        parseInt(titleId),
+      );
+      res.status(200).send(titleInfo);
+    } catch (err) {
+      next(err);
+    }
+  },
 };
