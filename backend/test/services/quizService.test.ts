@@ -1,6 +1,9 @@
 import { addQuizRepository } from '../../src/repositories/addQuizRepository';
 import { getQuizRepository } from '../../src/repositories/getQuizRepository';
-import { badRequestError } from '../../src/services/generalErrorService';
+import {
+  badRequestError,
+  notFoundError,
+} from '../../src/services/generalErrorService';
 import { quizService } from '../../src/services/quizService';
 
 describe('quizService get main info', () => {
@@ -74,21 +77,6 @@ describe('get quizzes by category', () => {
       'History',
     );
   });
-
-  it('should give 400 error if category is not valid', async () => {
-    //Arrange
-    const apiError = badRequestError('Invalid category type');
-    getQuizRepository.getQuizzesByCategory = jest.fn();
-
-    //Act
-    try {
-      await quizService.getQuizzesByCategory('');
-    } catch (err) {
-      //Assert
-      expect(err).toEqual(apiError);
-      expect(getQuizRepository.getQuizzesByCategory).toHaveBeenCalledTimes(0);
-    }
-  });
 });
 
 describe('add new title to quiz database', () => {
@@ -110,20 +98,6 @@ describe('add new title to quiz database', () => {
       'History',
       3,
     );
-  });
-
-  it('should throw error when not given right data', async () => {
-    //Arrange
-    const apiError = badRequestError('All fields are required');
-    addQuizRepository.addNewTitle = jest.fn();
-
-    //Act
-    try {
-      await quizService.addNewTitle('Some title', '', -1);
-    } catch (err) {
-      expect(err).toEqual(apiError);
-      expect(addQuizRepository.addNewTitle).toHaveBeenCalledTimes(0);
-    }
   });
 });
 
@@ -176,5 +150,68 @@ describe('add new question to database', () => {
       addNewData.answers,
       35,
     );
+  });
+
+  it('should throw error if there are no titles yet', async () => {
+    const addNewQuestion = {
+      question: 'Valami question',
+      answers: ['one', 'two', 'three'],
+      correctAnswer: [true, false, false],
+    };
+
+    //Arrange
+    const apiError = notFoundError("There aren't any titles yet");
+    getQuizRepository.getQuizMainInfo = jest.fn().mockReturnValue([]);
+    addQuizRepository.addAnswersToQuestion = jest.fn();
+
+    try {
+      //Act
+      await quizService.addNewQuestion(
+        addNewQuestion.question,
+        addNewQuestion.answers,
+        addNewQuestion.correctAnswer,
+      );
+    } catch (err) {
+      //Assert
+      expect(err).toEqual(apiError);
+      expect(getQuizRepository.getQuizMainInfo).toHaveBeenCalledTimes(1);
+      expect(addQuizRepository.addAnswersToQuestion).toHaveBeenCalledTimes(0);
+    }
+  });
+
+  it('should throw error if there are no questions yet', async () => {
+    const addNewQuestion = {
+      question: 'Valami question',
+      answers: ['one', 'two', 'three'],
+      correctAnswer: [true, false, false],
+    };
+
+    //Arrange
+    const apiError = notFoundError("There aren't any questions yet");
+    getQuizRepository.getQuizMainInfo = jest.fn().mockReturnValue([
+      {
+        id: 20,
+        title: 'Valami',
+        category: 'Movies',
+        userName: 'Béla',
+      },
+    ]);
+    addQuizRepository.addAndGetNewQuestion = jest.fn().mockReturnValue([]);
+    addQuizRepository.addAnswersToQuestion = jest.fn();
+
+    try {
+      //Act
+      await quizService.addNewQuestion(
+        addNewQuestion.question,
+        addNewQuestion.answers,
+        addNewQuestion.correctAnswer,
+      );
+    } catch (err) {
+      //Assert
+      expect(err).toEqual(apiError);
+      expect(getQuizRepository.getQuizMainInfo).toHaveBeenCalledTimes(1);
+      expect(addQuizRepository.addAndGetNewQuestion).toHaveBeenCalledTimes(1);
+      expect(addQuizRepository.addAnswersToQuestion).toHaveBeenCalledTimes(0);
+    }
   });
 });
