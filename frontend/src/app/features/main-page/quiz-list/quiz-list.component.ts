@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
 
@@ -10,11 +11,20 @@ import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageVi
 export class QuizListComponent implements OnInit {
   quizzes: QuizMainPageViewModel[] = [];
 
-  constructor(private quizService: QuizService) {}
+  constructor(private quizService: QuizService, private router: Router) {}
 
   ngOnInit(): void {
     this.quizService.getQuizMainInfo().subscribe((x) => {
       this.quizzes = x;
+    });
+  }
+
+  playNewestQuiz(title: string, titleId: number) {
+    this.router.navigate(['/play-quiz'], {
+      queryParams: { title: title, titleId: titleId },
+    });
+    this.quizService.playNewestQuiz(titleId).subscribe((x) => {
+      console.log(x);
     });
   }
 }

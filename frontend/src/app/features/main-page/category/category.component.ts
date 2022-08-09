@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
 
@@ -13,7 +13,8 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private quizService: QuizService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +30,15 @@ export class CategoryComponent implements OnInit {
             this.quizzesByCategory = x;
           });
       }
+    });
+  }
+
+  playNewestQuiz(title: string, titleId: number) {
+    this.router.navigate(['/play-quiz'], {
+      queryParams: { title: title, titleId: titleId },
+    });
+    this.quizService.playNewestQuiz(titleId).subscribe((x) => {
+      console.log(x);
     });
   }
 }

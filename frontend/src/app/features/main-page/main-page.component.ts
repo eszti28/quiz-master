@@ -31,7 +31,10 @@ export class MainPageComponent implements OnInit {
 
   playNewestQuiz(title: string, titleId: number) {
     this.router.navigate(['/play-quiz'], {
-      queryParams: { category: title },
+      queryParams: { title: title, titleId: titleId },
+    });
+    this.quizService.playNewestQuiz(titleId).subscribe((x) => {
+      console.log(x);
     });
   }
 }

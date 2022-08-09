@@ -99,7 +99,7 @@ export const quizController = {
   },
 
   async getQuestionsToTitle(req: Request, res: Response, next: NextFunction) {
-    const { titleId } = req.body;
+    const { titleId } = req.params;
 
     if (!titleId) {
       next(notFoundError('Title id required'));
