@@ -15,6 +15,13 @@ const routes: Routes = [
         (m) => m.MakeQuizModule
       ),
   },
+  {
+    path: 'play-quiz',
+    loadChildren: () =>
+      import('../app/features/play-quiz/play-quiz.module').then(
+        (m) => m.PlayQuizModule
+      ),
+  },
 ];
 
 @NgModule({

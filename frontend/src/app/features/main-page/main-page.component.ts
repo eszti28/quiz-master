@@ -29,7 +29,7 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  playNewestQuiz(title: string) {
+  playNewestQuiz(title: string, titleId: number) {
     this.router.navigate(['/play-quiz'], {
       queryParams: { category: title },
     });
