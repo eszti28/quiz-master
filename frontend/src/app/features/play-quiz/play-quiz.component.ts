@@ -24,4 +24,14 @@ export class PlayQuizComponent implements OnInit {
       });
     });
   }
+
+  isAnswerCorrect(answerId: number): void {
+    this.quizService.isAnswerCorrect(answerId).subscribe((isCorrect) => {
+      if (isCorrect === 1) {
+        console.log('correct');
+      } else {
+        console.log('nope');
+      }
+    });
+  }
 }

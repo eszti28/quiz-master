@@ -90,4 +90,8 @@ export const quizService = {
 
     return questionList;
   },
+
+  async isAnswerCorrect(answerId: number): Promise<number> {
+    return await getQuizRepository.isAnswerCorrect(answerId);
+  },
 };

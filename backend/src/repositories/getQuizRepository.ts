@@ -36,4 +36,14 @@ export const getQuizRepository = {
       titleId.toString(),
     ]);
   },
+
+  async isAnswerCorrect(answerId: number): Promise<number> {
+    const query: string = `SELECT correctAnswer FROM answers WHERE id = ?;`;
+
+    const answerIdResult = await db.query<{ correctAnswer: number }[]>(query, [
+      answerId.toString(),
+    ]);
+
+    return answerIdResult[0].correctAnswer;
+  },
 };

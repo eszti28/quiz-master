@@ -115,4 +115,20 @@ export const quizController = {
       next(err);
     }
   },
+
+  async isAnswerCorrect(req: Request, res: Response, next: NextFunction) {
+    const { answerId } = req.params;
+
+    if (!answerId) {
+      next(notFoundError('Answer id required'));
+      return;
+    }
+
+    try {
+      const answerInfo = await quizService.isAnswerCorrect(parseInt(answerId));
+      res.status(200).send(`${answerInfo}`);
+    } catch (err) {
+      next(err);
+    }
+  },
 };

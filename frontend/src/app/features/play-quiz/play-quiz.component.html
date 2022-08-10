@@ -4,9 +4,24 @@
   <div class="question" *ngFor="let question of questionsToTitle">
     <p>{{ question.question }}</p>
     <div class="answers">
-      <button mat-raised-button>{{ question.answers[0].answer }}</button>
-      <button mat-raised-button>{{ question.answers[1].answer }}</button>
-      <button mat-raised-button>{{ question.answers[2].answer }}</button>
+      <button
+        mat-raised-button
+        (click)="isAnswerCorrect(question.answers[0].id)"
+      >
+        {{ question.answers[0].answer }}
+      </button>
+      <button
+        mat-raised-button
+        (click)="isAnswerCorrect(question.answers[1].id)"
+      >
+        {{ question.answers[1].answer }}
+      </button>
+      <button
+        mat-raised-button
+        (click)="isAnswerCorrect(question.answers[2].id)"
+      >
+        {{ question.answers[2].answer }}
+      </button>
     </div>
   </div>
 </div>
