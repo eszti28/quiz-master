@@ -9,7 +9,7 @@ import { QuestionsAndAnswersViewModel } from 'src/app/shared/models/view/Questio
   styleUrls: ['./play-quiz.component.scss'],
 })
 export class PlayQuizComponent implements OnInit {
-  questionsToTitle: QuestionsAndAnswersViewModel[];
+  questionsToTitle: QuestionsAndAnswersViewModel[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
