@@ -5,7 +5,7 @@
     <h3>Our newest quiz</h3>
     <div
       class="newest-quiz"
-      (click)="playNewestQuiz(newestQuiz.title, newestQuiz.id)"
+      (click)="addQuizParams(newestQuiz.title, newestQuiz.id)"
     >
       <img [src]="imageURL" alt="quiz-category" />
       <div class="info">
@@ -17,10 +17,10 @@
   <h2>Test your knowledge with our quizzes</h2>
   <div class="categories">
     <p>Categories:</p>
-    <span (click)="appendQueryParams(CategoryType.All)">All</span>
-    <span (click)="appendQueryParams(CategoryType.Movies)">Movies</span>
-    <span (click)="appendQueryParams(CategoryType.History)">History</span>
-    <span (click)="appendQueryParams(CategoryType.Sport)">Sport</span>
+    <span (click)="addCategoryQueryParams(CategoryType.All)">All</span>
+    <span (click)="addCategoryQueryParams(CategoryType.Movies)">Movies</span>
+    <span (click)="addCategoryQueryParams(CategoryType.History)">History</span>
+    <span (click)="addCategoryQueryParams(CategoryType.Sport)">Sport</span>
   </div>
 </div>
 <div class="quiz-container">

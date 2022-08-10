@@ -23,18 +23,15 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  appendQueryParams(categoryTypeId: number) {
+  addCategoryQueryParams(categoryTypeId: number) {
     this.router.navigate(['/quizzes/categories'], {
       queryParams: { category: `${CategoryType[categoryTypeId]}` },
     });
   }
 
-  playNewestQuiz(title: string, titleId: number) {
+  addQuizParams(title: string, titleId: number) {
     this.router.navigate(['/play-quiz'], {
       queryParams: { title: title, titleId: titleId },
-    });
-    this.quizService.playNewestQuiz(titleId).subscribe((x) => {
-      console.log(x);
     });
   }
 }

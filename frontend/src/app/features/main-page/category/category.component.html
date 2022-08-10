@@ -1,7 +1,7 @@
 <div
   class="quiz"
   *ngFor="let quiz of quizzesByCategory"
-  (click)="playNewestQuiz(quiz.title, quiz.id)"
+  (click)="addQuizParams(quiz.title, quiz.id)"
 >
   <img src="../../../../assets/{{ quiz.category }}.png" alt="quiz-category" />
   <div class="info">

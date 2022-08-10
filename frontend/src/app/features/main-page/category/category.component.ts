@@ -33,12 +33,9 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  playNewestQuiz(title: string, titleId: number) {
+  addQuizParams(title: string, titleId: number) {
     this.router.navigate(['/play-quiz'], {
       queryParams: { title: title, titleId: titleId },
-    });
-    this.quizService.playNewestQuiz(titleId).subscribe((x) => {
-      console.log(x);
     });
   }
 }
