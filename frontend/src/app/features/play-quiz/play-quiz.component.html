@@ -1,1 +1,7 @@
-<p>{{ questionsToTitle }}</p>
+<h2>{{ questionsToTitle[0].title }}</h2>
+<div class="question" *ngFor="let question of questionsToTitle">
+  <p>Question: {{ question.question }}</p>
+  <p>{{ question.answers[0].answer }}</p>
+  <p>{{ question.answers[1].answer }}</p>
+  <p>{{ question.answers[2].answer }}</p>
+</div>

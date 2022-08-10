@@ -1,6 +1,5 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connections';
-import { QuestionDomainModel } from '../models/domain/QuestionDomainModel';
 
 export const addQuizRepository = {
   async addNewTitle(

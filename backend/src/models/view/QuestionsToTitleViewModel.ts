@@ -3,6 +3,6 @@ export interface QuestionsToTitleViewModel {
   title: string;
   question: string;
   answer: string;
-  correctAnswer: number;
   questionId: number;
+  answerId: number;
 }

@@ -1,4 +1,4 @@
-import { QuestionsToTitleViewModel } from '../models/view/QuestionsToTitleViewModel';
+import { QuestionsAndAnswersViewModel } from '../models/view/QuestionsAndAnswersViewModel';
 import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
 import { addQuizRepository } from '../repositories/addQuizRepository';
 import { getQuizRepository } from '../repositories/getQuizRepository';
@@ -58,7 +58,7 @@ export const quizService = {
 
   async getQuestionsToTitle(
     titleId: number,
-  ): Promise<QuestionsToTitleViewModel[]> {
+  ): Promise<QuestionsAndAnswersViewModel[]> {
     const requestedTitleId = await getQuizRepository.getQuestionsToTitle(
       titleId,
     );
@@ -66,6 +66,28 @@ export const quizService = {
     if (requestedTitleId.length < 1) {
       throw badRequestError('This title does not exist');
     }
-    return requestedTitleId;
+
+    const questionList: QuestionsAndAnswersViewModel[] = [];
+
+    requestedTitleId.forEach(q => {
+      if (!questionList.some(x => x.id === q.questionId)) {
+        const newQuestion = {
+          title: q.title,
+          id: q.questionId,
+          question: q.question,
+          answers: requestedTitleId
+            .filter(a => a.questionId === q.questionId)
+            .map(a => {
+              return {
+                id: a.answerId,
+                answer: a.answer,
+              };
+            }),
+        };
+        questionList.push(newQuestion);
+      }
+    });
+
+    return questionList;
   },
 };

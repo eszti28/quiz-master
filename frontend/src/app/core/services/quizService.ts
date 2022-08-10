@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import { AddNewQuestionRequestModel } from 'src/app/shared/models/request/AddNewQuestionRequestModel';
 import { addTitleRequestModel } from 'src/app/shared/models/request/addTitleRequestModel';
 import { AnswerAndIsCorrectViewModel } from 'src/app/shared/models/view/AnswerAndIsCorrectViewModel';
+import { QuestionsAndAnswersViewModel } from 'src/app/shared/models/view/QuestionsAndAnswersViewModel';
 import { QuestionsToTitleViewModel } from 'src/app/shared/models/view/QuestionsToTitleViewModel';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
 import { environment } from 'src/environments/environment';
@@ -59,8 +60,8 @@ export class QuizService {
     );
   }
 
-  playQuiz(titleId: string): Observable<QuestionsToTitleViewModel[]> {
-    return this.http.get<QuestionsToTitleViewModel[]>(
+  playQuiz(titleId: string): Observable<QuestionsAndAnswersViewModel[]> {
+    return this.http.get<QuestionsAndAnswersViewModel[]>(
       `${environment.apiUrl}/play-quiz/${titleId}`
     );
   }

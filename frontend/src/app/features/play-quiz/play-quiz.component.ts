@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
-import { QuestionsToTitleViewModel } from 'src/app/shared/models/view/QuestionsToTitleViewModel';
+import { QuestionsAndAnswersViewModel } from 'src/app/shared/models/view/QuestionsAndAnswersViewModel';
 
 @Component({
   selector: 'app-play-quiz',
@@ -9,7 +9,7 @@ import { QuestionsToTitleViewModel } from 'src/app/shared/models/view/QuestionsT
   styleUrls: ['./play-quiz.component.scss'],
 })
 export class PlayQuizComponent implements OnInit {
-  questionsToTitle: QuestionsToTitleViewModel[];
+  questionsToTitle: QuestionsAndAnswersViewModel[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
