@@ -31,5 +31,19 @@ h2 {
         color: red;
       }
     }
+
+    .correct {
+      background-color: green;
+      color: white;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    .incorrect {
+      background-color: red;
+      color: white;
+      pointer-events: none;
+      opacity: 0.65;
+    }
   }
 }

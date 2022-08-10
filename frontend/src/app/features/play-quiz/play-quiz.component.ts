@@ -10,6 +10,8 @@ import { QuestionsAndAnswersViewModel } from 'src/app/shared/models/view/Questio
 })
 export class PlayQuizComponent implements OnInit {
   questionsToTitle: QuestionsAndAnswersViewModel[] = [];
+  correctAnswer: number = 0;
+  score: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,13 +27,18 @@ export class PlayQuizComponent implements OnInit {
     });
   }
 
-  isAnswerCorrect(answerId: number): void {
+  isAnswerCorrect(answerId: number, questionId: number): void {
     this.quizService.isAnswerCorrect(answerId).subscribe((isCorrect) => {
       if (isCorrect === 1) {
-        console.log('correct');
+        this.correctAnswer = answerId;
       } else {
-        console.log('nope');
+        this.correctAnswer = answerId + 1000;
       }
     });
+    if (
+      questionId === this.questionsToTitle[this.questionsToTitle.length - 1].id
+    ) {
+      this.score = 'You score!';
+    }
   }
 }
