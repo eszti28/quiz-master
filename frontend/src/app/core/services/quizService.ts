@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AddNewQuestionRequestModel } from 'src/app/shared/models/request/AddNewQuestionRequestModel';
 import { addTitleRequestModel } from 'src/app/shared/models/request/addTitleRequestModel';
 import { AnswerAndIsCorrectViewModel } from 'src/app/shared/models/view/AnswerAndIsCorrectViewModel';
@@ -59,7 +59,7 @@ export class QuizService {
     );
   }
 
-  playNewestQuiz(titleId: number): Observable<QuestionsToTitleViewModel[]> {
+  playQuiz(titleId: string): Observable<QuestionsToTitleViewModel[]> {
     return this.http.get<QuestionsToTitleViewModel[]>(
       `${environment.apiUrl}/play-quiz/${titleId}`
     );
