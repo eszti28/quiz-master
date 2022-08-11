@@ -11,7 +11,8 @@ import { QuestionsAndAnswersViewModel } from 'src/app/shared/models/view/Questio
 export class PlayQuizComponent implements OnInit {
   questionsToTitle: QuestionsAndAnswersViewModel[] = [];
   correctAnswer: number = 0;
-  score: string = '';
+  currectScore: number = 0;
+  scoreResult: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,14 +32,17 @@ export class PlayQuizComponent implements OnInit {
     this.quizService.isAnswerCorrect(answerId).subscribe((isCorrect) => {
       if (isCorrect === 1) {
         this.correctAnswer = answerId;
+        this.currectScore++;
       } else {
         this.correctAnswer = answerId + 1000;
       }
+
+      if (
+        questionId ===
+        this.questionsToTitle[this.questionsToTitle.length - 1].id
+      ) {
+        this.scoreResult = `Your score is ${this.currectScore}/${this.questionsToTitle.length}`;
+      }
     });
-    if (
-      questionId === this.questionsToTitle[this.questionsToTitle.length - 1].id
-    ) {
-      this.score = 'You score!';
-    }
   }
 }
