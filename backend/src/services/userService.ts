@@ -1,24 +1,24 @@
-import { UserRegistrationRequestViewModel } from '../models/view/UserRegistrationRequestViewModel';
+import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
+import { UserRegistrationViewModel } from '../models/view/UserRegistrationViewModel';
 import { userRepository } from '../repositories/userRepository';
 import { conflictError } from './generalErrorService';
+import { passwordService } from './passwordService';
 
 export const userService = {
   async register(
-    userData: UserRegistrationRequestViewModel,
-  ): Promise<UserRegistrationRequestViewModel> {
+    userData: UserRegistrationRequestModel,
+  ): Promise<UserRegistrationViewModel> {
     if (await this.checkIfUsernameExists(userData.username)) {
       throw conflictError('Username is already taken.');
     }
 
-    //   const hashedPassword = passwordService.generateHash(userData.password);
+    const hashedPassword = passwordService.generateHash(userData.password);
 
     const newUserId = await userRepository.registerUser(
       userData.username,
       userData.email,
-      // hashedPassword,
-      userData.password,
+      hashedPassword,
     );
-    console.log(newUserId);
 
     //   const token: string = await jwtService.generateAccessToken(
     //     newUserId,
@@ -26,10 +26,8 @@ export const userService = {
     //   );
 
     return {
-      // token,
-      username: userData.username,
-      password: userData.password,
-      email: userData.email,
+      token: 'vmi',
+      userName: userData.username,
     };
   },
 

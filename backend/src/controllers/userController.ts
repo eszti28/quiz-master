@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import { UserRegistrationRequestViewModel } from '../models/view/UserRegistrationRequestViewModel';
+import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
+import { UserRegistrationViewModel } from '../models/view/UserRegistrationViewModel';
 import { badRequestError } from '../services/generalErrorService';
 import { userService } from '../services/userService';
 
 export const userController = {
   async register(
-    req: Request<UserRegistrationRequestViewModel>,
-    res: Response<UserRegistrationRequestViewModel>,
+    req: Request<UserRegistrationRequestModel>,
+    res: Response<UserRegistrationViewModel>,
     next: NextFunction,
   ) {
     const { username, password, email } = req.body;
@@ -36,15 +37,15 @@ export const userController = {
       return;
     }
 
-    const registrationData: UserRegistrationRequestViewModel = {
+    const registrationData: UserRegistrationRequestModel = {
       username,
       password,
       email,
     };
 
     try {
-      await userService.register(registrationData);
-      res.status(201).send(registrationData);
+      const userWithToken = await userService.register(registrationData);
+      res.status(201).send(userWithToken);
     } catch (err) {
       next(err);
     }
