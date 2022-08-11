@@ -2,6 +2,7 @@ import { UserRegistrationRequestModel } from '../models/request/UserRegistration
 import { UserRegistrationViewModel } from '../models/view/UserRegistrationViewModel';
 import { userRepository } from '../repositories/userRepository';
 import { conflictError } from './generalErrorService';
+import { jwtService } from './jwtService';
 import { passwordService } from './passwordService';
 
 export const userService = {
@@ -20,13 +21,13 @@ export const userService = {
       hashedPassword,
     );
 
-    //   const token: string = await jwtService.generateAccessToken(
-    //     newUserId,
-    //     userData.username,
-    //   );
+    const token: string = jwtService.generateAccessToken(
+      newUserId,
+      userData.username,
+    );
 
     return {
-      token: 'vmi',
+      token: token,
       userName: userData.username,
     };
   },
