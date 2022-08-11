@@ -23,6 +23,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'register',
+    loadChildren: () =>
+      import(
+        '../app/features/authentication/registration/registration.module'
+      ).then((m) => m.RegistrationModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./features/not-found/not-found.module').then(
