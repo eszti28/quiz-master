@@ -40,17 +40,16 @@ export class AuthenticationService {
   registerUser(
     userdata: UserRegistrationRequestModel
   ): Observable<UserRegistrationViewModel> {
-    return this.http
-      .post<UserRegistrationViewModel>(
-        `${environment.apiUrl}/user/register`,
-        userdata
-      )
-      .pipe(
-        tap(() => {
-          this.router.navigate(['/login']);
-        }),
-        catchError(() => of(null))
-      );
+    return this.http.post<UserRegistrationViewModel>(
+      `${environment.apiUrl}/user/register`,
+      userdata
+    );
+    // .pipe(
+    //   tap(() => {
+    //     this.router.navigate(['/login']);
+    //   }),
+    //   catchError(() => of(null))
+    // );
   }
 
   logout(): void {

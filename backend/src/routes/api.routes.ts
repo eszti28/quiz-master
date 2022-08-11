@@ -10,10 +10,10 @@ const apiRouter = express.Router();
 
 apiRouter.use(cors());
 apiRouter.use(express.json());
-apiRouter.use(getTokenFromRequest);
 apiRouter.use('/quizzes', getQuizRouter);
+apiRouter.use('/user', userRouter);
+apiRouter.use(getTokenFromRequest);
 apiRouter.use('/make-quiz', makeQuizRouter);
 apiRouter.use('/play-quiz', playQuizRouter);
-apiRouter.use('/user', userRouter);
 
 export default apiRouter;

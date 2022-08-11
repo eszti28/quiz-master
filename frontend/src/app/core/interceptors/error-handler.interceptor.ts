@@ -9,14 +9,14 @@ import {
 } from '@angular/common/http';
 import { catchError, map, Observable } from 'rxjs';
 import { SnackBarService } from '../services/snack-bar.service';
-// import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
   constructor(
-    private snackBarService: SnackBarService
-  ) // private authService: AuthenticationService
-  {}
+    private snackBarService: SnackBarService,
+    private authService: AuthenticationService
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -35,9 +35,9 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         const { message } = error.error;
         const statusCode = error.status;
 
-        // if (statusCode === 401) {
-        //   this.authService.logout();
-        // }
+        if (statusCode === 401) {
+          this.authService.logout();
+        }
 
         this.snackBarService.showErrorMessage(message, true);
 

@@ -1,0 +1,41 @@
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("../../../../assets/register.jpg");
+  background-size: cover;
+
+  .form-container {
+    h1 {
+      margin-bottom: 40px;
+      font-family: Georgia, "Times New Roman", Times, serif;
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
+
+    mat-form-field {
+      width: 250px;
+    }
+
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+
+      button {
+        background-color: rgba(226, 135, 25, 0.68);
+        color: white;
+      }
+    }
+  }
+}
