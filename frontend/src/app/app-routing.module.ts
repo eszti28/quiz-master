@@ -22,6 +22,13 @@ const routes: Routes = [
         (m) => m.PlayQuizModule
       ),
   },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./features/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
+  },
 ];
 
 @NgModule({
