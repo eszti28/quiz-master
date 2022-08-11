@@ -4,18 +4,21 @@ import {
   badRequestError,
   notFoundError,
 } from '../services/generalErrorService';
+import { jwtService } from '../services/jwtService';
 import { quizService } from '../services/quizService';
 
 export const quizController = {
   async addNewTitle(req: Request, res: Response, next: NextFunction) {
-    const { title, category, userId } = req.body;
+    const { title, category } = req.body;
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
 
     if (!(category in CategoryType)) {
       next(badRequestError('Invalid category type'));
       return;
     }
 
-    if (!title || !category || !userId) {
+    if (!title || !category) {
       next(badRequestError('Every field is required'));
       return;
     }
