@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -13,15 +13,13 @@ import { QuizService } from 'src/app/core/services/quizService';
   templateUrl: './make-quiz.component.html',
   styleUrls: ['./make-quiz.component.scss'],
 })
-export class MakeQuizComponent implements OnInit {
+export class MakeQuizComponent {
   form = new FormGroup({
     title: new FormControl('', Validators.required),
     selectFormControl: new FormControl('', Validators.required),
   });
 
   constructor(private quizService: QuizService, private router: Router) {}
-
-  ngOnInit(): void {}
 
   get title(): AbstractControl {
     return this.form.get('title');

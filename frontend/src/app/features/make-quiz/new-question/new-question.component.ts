@@ -1,10 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
   FormGroup,
-  FormGroupDirective,
-  NgForm,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +14,7 @@ import { AnswerAndIsCorrectViewModel } from 'src/app/shared/models/view/AnswerAn
   templateUrl: './new-question.component.html',
   styleUrls: ['./new-question.component.scss'],
 })
-export class NewQuestionComponent implements OnInit {
+export class NewQuestionComponent {
   form = new FormGroup({
     question: new FormControl('', Validators.required),
     answerOne: new FormControl('', Validators.required),
@@ -26,8 +24,6 @@ export class NewQuestionComponent implements OnInit {
   });
 
   constructor(private quizService: QuizService, private router: Router) {}
-
-  ngOnInit(): void {}
 
   get question(): AbstractControl {
     return this.form.get('question');
