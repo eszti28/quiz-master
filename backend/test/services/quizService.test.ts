@@ -215,3 +215,90 @@ describe('add new question to database', () => {
     }
   });
 });
+
+describe('get questions to title', () => {
+  beforeEach(() => {
+    console.error = jest.fn();
+  });
+
+  it('should give back questions and answers if everything is correct', async () => {
+    const questionData = [
+      {
+        titleId: 1,
+        title: 'Some title',
+        question: 'Question one',
+        answer: 'Answer one',
+        questionId: 2,
+        answerId: 10,
+      },
+      {
+        titleId: 1,
+        title: 'Some title',
+        question: 'Question one',
+        answer: 'Answer two',
+        questionId: 2,
+        answerId: 11,
+      },
+    ];
+
+    //Arrange
+    getQuizRepository.getQuestionsToTitle = jest
+      .fn()
+      .mockReturnValue(questionData);
+
+    //Act
+    await quizService.getQuestionsToTitle(1);
+
+    //Assert
+    expect(getQuizRepository.getQuestionsToTitle).toHaveBeenCalledTimes(1);
+    expect(getQuizRepository.getQuestionsToTitle).toHaveBeenCalledWith(1);
+  });
+
+  it('should throw error if there are no titles with given id', async () => {
+    //Arrange
+    const apiError = badRequestError('This title does not exist');
+    getQuizRepository.getQuestionsToTitle = jest.fn().mockReturnValue([]);
+
+    try {
+      //Act
+      await quizService.getQuestionsToTitle(15);
+    } catch (err) {
+      //Assert
+      expect(err).toEqual(apiError);
+      expect(getQuizRepository.getQuestionsToTitle).toHaveBeenCalledTimes(1);
+    }
+  });
+});
+
+describe('check if answer is correct', () => {
+  beforeEach(() => {
+    console.error = jest.fn();
+  });
+
+  it('should respond with 1 or 0', async () => {
+    //Arrange
+    getQuizRepository.isAnswerCorrect = jest.fn().mockReturnValue(0);
+
+    //Act
+    await quizService.isAnswerCorrect(22);
+
+    //Assert
+    expect(getQuizRepository.isAnswerCorrect).toHaveBeenCalledTimes(1);
+    expect(getQuizRepository.isAnswerCorrect).toHaveBeenCalledWith(22);
+  });
+
+  it('should respond with error if answer is not 1 or 0', async () => {
+    //Arrange
+    const apiError = badRequestError('Given response is invalid');
+    getQuizRepository.isAnswerCorrect = jest.fn().mockReturnValue(3);
+
+    try {
+      //Act
+      await quizService.isAnswerCorrect(25);
+    } catch (err) {
+      //Assert
+      expect(err).toEqual(apiError);
+      expect(getQuizRepository.isAnswerCorrect).toHaveBeenCalledTimes(1);
+    }
+  });
+});

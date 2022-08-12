@@ -92,6 +92,12 @@ export const quizService = {
   },
 
   async isAnswerCorrect(answerId: number): Promise<number> {
-    return await getQuizRepository.isAnswerCorrect(answerId);
+    const isCorrect = await getQuizRepository.isAnswerCorrect(answerId);
+
+    if (isCorrect < 0 || isCorrect > 1) {
+      throw badRequestError('Given response is invalid');
+    }
+
+    return isCorrect;
   },
 };
