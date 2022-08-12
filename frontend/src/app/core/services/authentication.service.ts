@@ -7,17 +7,12 @@ import { UserRegistrationRequestModel } from 'src/app/shared/models/request/User
 import { UserLoginViewModel } from 'src/app/shared/models/view/UserLoginViewModel';
 import { UserRegistrationViewModel } from 'src/app/shared/models/view/UserRegistrationViewModel';
 import { environment } from 'src/environments/environment';
-import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private snackBarService: SnackBarService
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getToken(): string {
     return localStorage.getItem('token') as string;
@@ -62,7 +57,7 @@ export class AuthenticationService {
         tap((response) => {
           this.setToken(response.token);
           this.setUsername(response.username);
-          this.router.navigate(['/main']);
+          this.router.navigate(['/quizzes']);
         }),
         mapTo(undefined)
       );
