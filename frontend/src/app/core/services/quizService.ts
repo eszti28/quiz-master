@@ -36,7 +36,6 @@ export class QuizService {
       {
         title: title.value,
         category: selectFormControl.value,
-        userId: 2,
       }
     );
   }

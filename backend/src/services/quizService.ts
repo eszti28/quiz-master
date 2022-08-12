@@ -18,15 +18,15 @@ export const quizService = {
     answers: string[],
     correctAnswer: boolean[],
   ): Promise<void> {
-    const maxTitleId = await getQuizRepository.getQuizMainInfo();
+    const maxTitleId = await getQuizRepository.getMaxTitleId();
 
-    if (maxTitleId.length < 1) {
+    if (!maxTitleId) {
       throw notFoundError("There aren't any titles yet");
     }
 
     const newQuestionId = await addQuizRepository.addAndGetNewQuestion(
       question,
-      maxTitleId[0].id,
+      maxTitleId,
     );
 
     if (newQuestionId.length < 1) {

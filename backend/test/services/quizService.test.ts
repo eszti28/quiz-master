@@ -107,15 +107,6 @@ describe('add new question to database', () => {
   });
 
   it('should give question to database', async () => {
-    const getMainInfo = [
-      {
-        id: 15,
-        title: 'Valami title',
-        category: 'History',
-        userName: 'Eszti',
-      },
-    ];
-
     const addNewData = {
       question: 'Valami question',
       answers: ['one', 'two', 'three'],
@@ -124,10 +115,10 @@ describe('add new question to database', () => {
 
     //Arrange
 
-    getQuizRepository.getQuizMainInfo = jest.fn().mockReturnValue(getMainInfo);
+    getQuizRepository.getMaxTitleId = jest.fn().mockReturnValue(20);
     addQuizRepository.addAndGetNewQuestion = jest
       .fn()
-      .mockReturnValue([{ id: 35 }]);
+      .mockReturnValue([{ id: 20 }]);
     addQuizRepository.addAnswersToQuestion = jest.fn();
 
     //Act
@@ -138,17 +129,17 @@ describe('add new question to database', () => {
     );
 
     //Assert
-    expect(getQuizRepository.getQuizMainInfo).toHaveBeenCalledTimes(1);
+    expect(getQuizRepository.getMaxTitleId).toHaveBeenCalledTimes(1);
     expect(addQuizRepository.addAndGetNewQuestion).toHaveBeenCalledTimes(1);
     expect(addQuizRepository.addAndGetNewQuestion).toHaveBeenCalledWith(
       addNewData.question,
-      15,
+      20,
     );
     expect(addQuizRepository.addAnswersToQuestion).toHaveBeenCalledTimes(1);
     expect(addQuizRepository.addAnswersToQuestion).toHaveBeenCalledWith(
       [1, 0, 0],
       addNewData.answers,
-      35,
+      20,
     );
   });
 
@@ -161,7 +152,7 @@ describe('add new question to database', () => {
 
     //Arrange
     const apiError = notFoundError("There aren't any titles yet");
-    getQuizRepository.getQuizMainInfo = jest.fn().mockReturnValue([]);
+    getQuizRepository.getMaxTitleId = jest.fn().mockReturnValue(null);
     addQuizRepository.addAnswersToQuestion = jest.fn();
 
     try {
@@ -174,7 +165,7 @@ describe('add new question to database', () => {
     } catch (err) {
       //Assert
       expect(err).toEqual(apiError);
-      expect(getQuizRepository.getQuizMainInfo).toHaveBeenCalledTimes(1);
+      expect(getQuizRepository.getMaxTitleId).toHaveBeenCalledTimes(1);
       expect(addQuizRepository.addAnswersToQuestion).toHaveBeenCalledTimes(0);
     }
   });
@@ -188,14 +179,7 @@ describe('add new question to database', () => {
 
     //Arrange
     const apiError = notFoundError("There aren't any questions yet");
-    getQuizRepository.getQuizMainInfo = jest.fn().mockReturnValue([
-      {
-        id: 20,
-        title: 'Valami',
-        category: 'Movies',
-        userName: 'Béla',
-      },
-    ]);
+    getQuizRepository.getMaxTitleId = jest.fn().mockReturnValue(20);
     addQuizRepository.addAndGetNewQuestion = jest.fn().mockReturnValue([]);
     addQuizRepository.addAnswersToQuestion = jest.fn();
 

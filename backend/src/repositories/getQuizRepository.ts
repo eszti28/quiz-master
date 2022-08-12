@@ -25,6 +25,12 @@ export const getQuizRepository = {
     return await db.query<QuizMainPageViewModel[]>(query, [categoryType]);
   },
 
+  async getMaxTitleId(): Promise<number> {
+    const query: string = `SELECT MAX(titles.id) AS titleId from titles;`;
+    const maxTitleId = await db.query<{ titleId: number }[]>(query);
+    return maxTitleId[0].titleId;
+  },
+
   async getQuestionsToTitle(
     titleId: number,
   ): Promise<QuestionsToTitleViewModel[]> {
