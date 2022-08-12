@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { Observable, tap, mapTo, catchError, of } from 'rxjs';
+import { UserLoginRequestViewModel } from 'src/app/shared/models/request/UserLoginRequestViewModel';
 import { UserRegistrationRequestModel } from 'src/app/shared/models/request/UserRegistrationRequestModel';
+import { UserLoginViewModel } from 'src/app/shared/models/view/UserLoginViewModel';
 import { UserRegistrationViewModel } from 'src/app/shared/models/view/UserRegistrationViewModel';
 import { environment } from 'src/environments/environment';
 import { SnackBarService } from './snack-bar.service';
@@ -40,16 +42,30 @@ export class AuthenticationService {
   registerUser(
     userdata: UserRegistrationRequestModel
   ): Observable<UserRegistrationViewModel> {
-    return this.http.post<UserRegistrationViewModel>(
-      `${environment.apiUrl}/user/register`,
-      userdata
-    );
-    // .pipe(
-    //   tap(() => {
-    //     this.router.navigate(['/login']);
-    //   }),
-    //   catchError(() => of(null))
-    // );
+    return this.http
+      .post<UserRegistrationViewModel>(
+        `${environment.apiUrl}/user/register`,
+        userdata
+      )
+      .pipe(
+        tap(() => {
+          this.router.navigate(['/login']);
+        }),
+        catchError(() => of(null))
+      );
+  }
+
+  login(loginData: UserLoginRequestViewModel): Observable<void> {
+    return this.http
+      .post<UserLoginViewModel>(`${environment.apiUrl}/user/login`, loginData)
+      .pipe(
+        tap((response) => {
+          this.setToken(response.token);
+          this.setUsername(response.username);
+          this.router.navigate(['/main']);
+        }),
+        mapTo(undefined)
+      );
   }
 
   logout(): void {

@@ -30,6 +30,13 @@ const routes: Routes = [
       ).then((m) => m.RegistrationModule),
   },
   {
+    path: 'login',
+    loadChildren: () =>
+      import('../app/features/authentication/login/login.module').then(
+        (m) => m.LoginModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./features/not-found/not-found.module').then(

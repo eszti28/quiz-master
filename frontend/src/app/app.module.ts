@@ -8,7 +8,6 @@ import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandlerInterceptor } from './core/interceptors/error-handler.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RegistrationComponent } from './features/authentication/registration/registration.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 @NgModule({
