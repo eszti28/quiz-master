@@ -5,4 +5,8 @@ export const passwordService = {
     const salt: string = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(password, salt);
   },
+
+  comparePasswords(password: string, hashedPassword: string): boolean {
+    return bcrypt.compareSync(password, hashedPassword);
+  },
 };
