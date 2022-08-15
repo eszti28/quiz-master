@@ -1,11 +1,18 @@
-<div
-  class="quiz"
-  *ngFor="let quiz of quizzes"
-  (click)="addQuizParams(quiz.title, quiz.id)"
->
-  <img src="../../../../assets/{{ quiz.category }}.png" alt="quiz-category" />
-  <div class="info">
-    <p>{{ quiz.title }}</p>
-    <span>By {{ quiz.userName }}</span>
+<div class="quiz-container">
+  <div
+    class="quiz"
+    *ngFor="let quiz of quizzes"
+    (click)="addQuizParams(quiz.title, quiz.id)"
+  >
+    <div class="quiz-card">
+      <img
+        src="../../../../assets/{{ quiz.category }}.png"
+        alt="quiz-category"
+      />
+      <div class="info">
+        <p>{{ quiz.title }}</p>
+        <span>By {{ quiz.userName }}</span>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,10 +1,10 @@
 <div class="header">
-  <p class="page-name">EsztiFeed</p>
+  <p class="page-name" routerLink="/quizzes">EsztiFeed</p>
   <div class="make-quiz">
-    <button (click)="makeQuiz()">Make your own quiz</button>
+    <a (click)="makeQuiz()">Make your own quiz</a>
   </div>
   <div class="my-quizzes">
-    <button (click)="getQuizzesById()">My quizzes</button>
+    <a (click)="getQuizzesById()">My quizzes</a>
   </div>
   <div class="logout">
     <a (click)="logout()">Logout</a>

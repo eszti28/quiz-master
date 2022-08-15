@@ -1,8 +1,7 @@
 <app-header></app-header>
 <div class="quiz">
   <div class="newest">
-    <img src="../../../assets/quiz-time.jpg" alt="new-quiz-picture" />
-    <h3>Our newest quiz</h3>
+    <p>Our newest quiz</p>
     <div
       class="newest-quiz"
       (click)="addQuizParams(newestQuiz.title, newestQuiz.id)"
@@ -14,7 +13,7 @@
       </div>
     </div>
   </div>
-  <h2>Test your knowledge with our quizzes</h2>
+  <p class="quizzes-par">Quizzes</p>
   <div class="categories">
     <p>Categories:</p>
     <span (click)="addCategoryQueryParams(CategoryType.All)">All</span>
@@ -25,4 +24,7 @@
 </div>
 <div class="quiz-container">
   <router-outlet></router-outlet>
+</div>
+<div class="footer">
+  <p>Eszti Corporated</p>
 </div>

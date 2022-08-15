@@ -6,20 +6,25 @@
   width: 98%;
   height: 65px;
   padding: 0 15px;
-  background-color: rgb(250, 242, 242);
-  color: rgb(19, 2, 2);
+  background-color: rgb(0, 0, 0);
   justify-content: space-between;
   align-items: center;
-  border-style: outset none;
-  border-color: rgb(249, 238, 224);
-  font-size: 18px;
+  font-size: 20px;
 
-  .page-name,
-  .logout > a {
-    color: rgb(215, 44, 44);
-    font-size: 22px;
-    text-decoration: none;
+  .page-name {
+    margin: 0;
+    padding: 22.5px;
+    background-color: yellow;
+    color: rgb(0, 0, 0);
     cursor: pointer;
+  }
+  .logout > a {
+    cursor: pointer;
+    color: yellow;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font: normal 62.5% "proxima-nova-alt", Helvetica, Arial, sans-serif;
   }
 
   .page-name {
@@ -29,12 +34,13 @@
 
   .make-quiz,
   .my-quizzes {
-    button {
-      padding: 8px;
-      border: none;
-      background-color: white;
-      color: red;
+    a {
       cursor: pointer;
+      color: rgb(255, 255, 255);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font: normal 62.5% "proxima-nova-alt", Helvetica, Arial, sans-serif;
     }
   }
 }

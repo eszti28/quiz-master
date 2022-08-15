@@ -1,45 +1,51 @@
+.quiz {
+  font-family: Georgia, "Times New Roman", Times, serif;
+
+  .quizzes-par {
+    font-size: 35px;
+    margin: 30px 0;
+    padding: 20px 40px;
+    background-color: yellow;
+  }
+}
+
 .newest {
   display: flex;
   flex-direction: column;
-  margin-top: 70px;
+  margin-top: 100px;
   align-items: center;
 
-  h3 {
-    font-size: 20px;
+  p {
+    font-size: 45px;
+    margin-bottom: 40px;
   }
 
   .newest-quiz {
     display: flex;
-    margin-right: 5px;
-    padding: 10px;
-    border: 2px solid rgba(28, 110, 164, 0.13);
-    border-radius: 6px;
+    flex-direction: column;
+    box-shadow: 0px 6px 10px -1px rgba(103, 103, 103, 0.82);
+    border-radius: 8px;
     cursor: pointer;
 
     img {
-      width: 200px;
-      height: 130px;
-      margin: 10px;
+      width: 300px;
+      margin-bottom: 10px;
+      border-radius: 8px 8px 0 0;
     }
 
     .info {
-      margin: 20px 10px;
+      padding: 10px 15px;
       p {
-        font-size: 25px;
-        margin: 2px;
+        font-size: 23px;
+        margin-bottom: 10px;
       }
 
       span {
-        font-size: 18px;
+        font-size: 14px;
         color: rgb(177, 177, 177);
-        margin-left: 4px;
       }
     }
   }
-}
-
-h2 {
-  margin: 20px;
 }
 
 .categories {
@@ -49,13 +55,37 @@ h2 {
 
   p {
     margin: 0 15px;
+    padding: 10px;
   }
 
   span {
     margin: 0 15px;
+    padding: 10px;
+    border: 3px solid yellow;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
     cursor: pointer;
     &:hover {
-      color: red;
+      border: 2px solid;
+      background-color: yellow;
+      color: black;
     }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: black;
+  p {
+    margin: 0;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font: normal 62.5% "proxima-nova-alt", Helvetica, Arial, sans-serif;
   }
 }

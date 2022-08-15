@@ -1,1 +1,13 @@
-<p>my-quizzes works!</p>
+<app-header></app-header>
+<div class="my-quizzes">
+  <div class="quiz" *ngFor="let quiz of myQuizzes">
+    <div class="info">
+      <p>{{ quiz.title }}</p>
+      <p>In {{ quiz.category }}</p>
+      <p>By {{ quiz.userName }}</p>
+    </div>
+    <div class="del-btn">
+      <button>Delete</button>
+    </div>
+  </div>
+</div>
