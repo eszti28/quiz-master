@@ -105,7 +105,7 @@ export const quizController = {
     const { titleId } = req.params;
 
     if (!titleId) {
-      next(notFoundError('Title id required'));
+      next(notFoundError('Valid title id required'));
       return;
     }
 
@@ -123,13 +123,25 @@ export const quizController = {
     const { answerId } = req.params;
 
     if (!answerId) {
-      next(notFoundError('Answer id required'));
+      next(notFoundError('Valid answer id required'));
       return;
     }
 
     try {
       const answerInfo = await quizService.isAnswerCorrect(parseInt(answerId));
       res.status(200).send(`${answerInfo}`);
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async getQuizzesByUserId(req: Request, res: Response, next: NextFunction) {
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
+
+    try {
+      const quizzesById = await quizService.getQuizzesByUserId(userId);
+      res.status(200).send(quizzesById);
     } catch (err) {
       next(err);
     }

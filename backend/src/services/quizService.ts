@@ -99,4 +99,8 @@ export const quizService = {
 
     return isCorrect;
   },
+
+  async getQuizzesByUserId(userId: number): Promise<QuizMainPageDomainModel[]> {
+    return await getQuizRepository.getQuizzesByUserId(userId);
+  },
 };
