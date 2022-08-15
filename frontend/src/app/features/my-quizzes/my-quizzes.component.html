@@ -2,7 +2,7 @@
 <div class="my-quizzes">
   <p class="par">My quizzes</p>
   <div class="no-quiz" *ngIf="noQuizzes">
-    <p>You don't have any quizzes yet.</p>
+    <p>{{ noQuizzes }}</p>
   </div>
   <div *ngIf="myQuizzes">
     <div class="quiz" *ngFor="let quiz of myQuizzes">
