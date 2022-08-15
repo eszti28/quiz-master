@@ -20,8 +20,12 @@
 
       button {
         margin: 20px;
-        background-color: #d23257;
+        background-color: black;
         color: #fff;
+        &:hover {
+          background-color: yellow;
+          color: black;
+        }
       }
     }
 

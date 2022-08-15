@@ -1,13 +1,14 @@
 <app-header></app-header>
 <div class="my-quizzes">
+  <p class="par">My quizzes</p>
   <div class="quiz" *ngFor="let quiz of myQuizzes">
     <div class="info">
       <p>{{ quiz.title }}</p>
-      <p>In {{ quiz.category }}</p>
-      <p>By {{ quiz.userName }}</p>
+      <span>In {{ quiz.category }}</span>
+      <span>By {{ quiz.userName }}</span>
     </div>
     <div class="del-btn">
-      <button>Delete</button>
+      <button mat-raised-button>Delete</button>
     </div>
   </div>
 </div>

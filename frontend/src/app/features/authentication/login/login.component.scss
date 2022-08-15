@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url("../../../../assets/register.jpg");
+  background-image: url("../../../../assets/background.jpg");
   background-size: cover;
 
   .form-container {
@@ -44,7 +44,7 @@
         }
 
         a {
-          color: #d69122;
+          color: black;
           font-size: 16px;
           text-decoration: none;
           margin-left: 5px;
@@ -52,7 +52,7 @@
       }
 
       button {
-        background-color: rgba(226, 135, 25, 0.68);
+        background-color: black;
         color: white;
       }
     }
