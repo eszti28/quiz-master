@@ -1,8 +1,10 @@
+import { GetNewQuestionDomainModel } from '../models/domain/GetNewQuestionDomainModel';
 import { QuestionsAndAnswersViewModel } from '../models/view/QuestionsAndAnswersViewModel';
-import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
+import { QuizMainPageDomainModel } from '../models/domain/QuizMainPageDomainModel';
 import { addQuizRepository } from '../repositories/addQuizRepository';
 import { getQuizRepository } from '../repositories/getQuizRepository';
 import { badRequestError, notFoundError } from './generalErrorService';
+import { QuestionsToTitleDomainModel } from '../models/domain/QuestionsToTitleDomainModel';
 
 export const quizService = {
   async addNewTitle(
@@ -18,16 +20,14 @@ export const quizService = {
     answers: string[],
     correctAnswer: boolean[],
   ): Promise<void> {
-    const maxTitleId = await getQuizRepository.getMaxTitleId();
+    const maxTitleId: number = await getQuizRepository.getMaxTitleId();
 
     if (!maxTitleId) {
       throw notFoundError("There aren't any titles yet");
     }
 
-    const newQuestionId = await addQuizRepository.addAndGetNewQuestion(
-      question,
-      maxTitleId,
-    );
+    const newQuestionId: GetNewQuestionDomainModel[] =
+      await addQuizRepository.addAndGetNewQuestion(question, maxTitleId);
 
     if (newQuestionId.length < 1) {
       throw notFoundError("There aren't any questions yet");
@@ -46,22 +46,21 @@ export const quizService = {
     );
   },
 
-  async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
+  async getQuizMainInfo(): Promise<QuizMainPageDomainModel[]> {
     return await getQuizRepository.getQuizMainInfo();
   },
 
   async getQuizzesByCategory(
     categoryType: string,
-  ): Promise<QuizMainPageViewModel[]> {
+  ): Promise<QuizMainPageDomainModel[]> {
     return await getQuizRepository.getQuizzesByCategory(categoryType);
   },
 
   async getQuestionsToTitle(
     titleId: number,
   ): Promise<QuestionsAndAnswersViewModel[]> {
-    const requestedTitleId = await getQuizRepository.getQuestionsToTitle(
-      titleId,
-    );
+    const requestedTitleId: QuestionsToTitleDomainModel[] =
+      await getQuizRepository.getQuestionsToTitle(titleId);
 
     if (requestedTitleId.length < 1) {
       throw badRequestError('This title does not exist');

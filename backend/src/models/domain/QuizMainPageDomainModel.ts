@@ -1,4 +1,4 @@
-export interface QuizMainPageViewModel {
+export interface QuizMainPageDomainModel {
   id: number;
   title: string;
   category: string;

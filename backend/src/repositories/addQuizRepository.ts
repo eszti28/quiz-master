@@ -1,5 +1,6 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connections';
+import { GetNewQuestionDomainModel } from '../models/domain/GetNewQuestionDomainModel';
 
 export const addQuizRepository = {
   async addNewTitle(
@@ -15,14 +16,14 @@ export const addQuizRepository = {
   async addAndGetNewQuestion(
     question: string,
     titleId: number,
-  ): Promise<{ id: number }[]> {
+  ): Promise<GetNewQuestionDomainModel[]> {
     const addNewQuestion: string = `INSERT INTO questions (question, titleId) VALUES (?, ?);`;
 
     const getNewestQuestion: string = `SELECT MAX(id) AS id FROM questions;`;
 
     await db.query<OkPacket>(addNewQuestion, [question, titleId.toString()]);
 
-    return await db.query<{ id: number }[]>(getNewestQuestion);
+    return await db.query<GetNewQuestionDomainModel[]>(getNewestQuestion);
   },
 
   async addAnswersToQuestion(

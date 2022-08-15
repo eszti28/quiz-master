@@ -1,44 +1,46 @@
 import { db } from '../data/connections';
-import { QuestionsToTitleViewModel } from '../models/view/QuestionsToTitleViewModel';
-import { QuizMainPageViewModel } from '../models/view/QuizMainPageViewModel';
+import { GetMaxTitleIdDomainModel } from '../models/domain/GetMaxTitleIdDomainModel';
+import { IsAnswerCorrectDomainModel } from '../models/domain/IsAnswerCorrectDomainModel';
+import { QuestionsToTitleDomainModel } from '../models/domain/QuestionsToTitleDomainModel';
+import { QuizMainPageDomainModel } from '../models/domain/QuizMainPageDomainModel';
 
 export const getQuizRepository = {
-  async getQuizMainInfo(): Promise<QuizMainPageViewModel[]> {
+  async getQuizMainInfo(): Promise<QuizMainPageDomainModel[]> {
     const query: string = `SELECT titles.id AS id, title, category, users.userName AS userName from titles 
     JOIN users ON titles.userId = users.id
     JOIN questions ON titles.id = questions.titleId
     WHERE LENGTH(question) > 0
     GROUP BY titles.id
     ORDER BY titles.id DESC;`;
-    return await db.query<QuizMainPageViewModel[]>(query);
+    return await db.query<QuizMainPageDomainModel[]>(query);
   },
 
   async getQuizzesByCategory(
     categoryType: string,
-  ): Promise<QuizMainPageViewModel[]> {
+  ): Promise<QuizMainPageDomainModel[]> {
     const query: string = `SELECT titles.id AS id, title, category, users.userName AS userName from titles 
     JOIN users ON titles.userId = users.id
     JOIN questions ON titles.id = questions.titleId
     WHERE LENGTH(question) > 0 AND category = ?
     GROUP BY titles.id
     ORDER BY titles.id DESC;`;
-    return await db.query<QuizMainPageViewModel[]>(query, [categoryType]);
+    return await db.query<QuizMainPageDomainModel[]>(query, [categoryType]);
   },
 
   async getMaxTitleId(): Promise<number> {
     const query: string = `SELECT MAX(titles.id) AS titleId from titles;`;
-    const maxTitleId = await db.query<{ titleId: number }[]>(query);
+    const maxTitleId = await db.query<GetMaxTitleIdDomainModel[]>(query);
     return maxTitleId[0].titleId;
   },
 
   async getQuestionsToTitle(
     titleId: number,
-  ): Promise<QuestionsToTitleViewModel[]> {
+  ): Promise<QuestionsToTitleDomainModel[]> {
     const query: string = `SELECT titles.id AS titleId, title, question, answer, quizId AS questionId, answers.id AS answerId from titles 
     JOIN questions ON titles.id = questions.titleId
     JOIN answers ON questions.id = answers.quizId
     WHERE titleId = ?;`;
-    return await db.query<QuestionsToTitleViewModel[]>(query, [
+    return await db.query<QuestionsToTitleDomainModel[]>(query, [
       titleId.toString(),
     ]);
   },
@@ -46,7 +48,7 @@ export const getQuizRepository = {
   async isAnswerCorrect(answerId: number): Promise<number> {
     const query: string = `SELECT correctAnswer FROM answers WHERE id = ?;`;
 
-    const answerIdResult = await db.query<{ correctAnswer: number }[]>(query, [
+    const answerIdResult = await db.query<IsAnswerCorrectDomainModel[]>(query, [
       answerId.toString(),
     ]);
 

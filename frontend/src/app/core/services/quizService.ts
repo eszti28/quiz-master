@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { map, Observable } from 'rxjs';
-import { AddNewQuestionRequestModel } from 'src/app/shared/models/request/AddNewQuestionRequestModel';
-import { addTitleRequestModel } from 'src/app/shared/models/request/addTitleRequestModel';
+import { Observable } from 'rxjs';
 import { AnswerAndIsCorrectViewModel } from 'src/app/shared/models/view/AnswerAndIsCorrectViewModel';
 import { QuestionsAndAnswersViewModel } from 'src/app/shared/models/view/QuestionsAndAnswersViewModel';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
@@ -30,21 +28,18 @@ export class QuizService {
   addNewTitle(
     title: AbstractControl,
     selectFormControl: AbstractControl
-  ): Observable<addTitleRequestModel> {
-    return this.http.post<addTitleRequestModel>(
-      `${environment.apiUrl}/make-quiz/title`,
-      {
-        title: title.value,
-        category: selectFormControl.value,
-      }
-    );
+  ): Observable<void> {
+    return this.http.post<void>(`${environment.apiUrl}/make-quiz/title`, {
+      title: title.value,
+      category: selectFormControl.value,
+    });
   }
 
   addNewQuestion(
     question: string,
     result: AnswerAndIsCorrectViewModel[]
-  ): Observable<AddNewQuestionRequestModel> {
-    return this.http.post<AddNewQuestionRequestModel>(
+  ): Observable<void> {
+    return this.http.post<void>(
       `${environment.apiUrl}/make-quiz/new-question`,
       {
         question: question,

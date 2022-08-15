@@ -60,8 +60,8 @@ export class NewQuestionComponent {
         isCorrect: this.radioFormControl.value === '3',
       },
     ];
-
     this.quizService.addNewQuestion(this.question.value, result).subscribe();
+    this.form.reset();
   }
 
   doneQuiz(): void {

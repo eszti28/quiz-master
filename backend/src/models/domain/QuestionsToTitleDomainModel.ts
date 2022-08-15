@@ -1,4 +1,4 @@
-export interface QuestionsToTitleViewModel {
+export interface QuestionsToTitleDomainModel {
   titleId: number;
   title: string;
   question: string;
