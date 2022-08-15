@@ -64,4 +64,10 @@ export class QuizService {
       `${environment.apiUrl}/play-quiz/isCorrect/${answerId}`
     );
   }
+
+  getQuizzesByUserId(): Observable<QuizMainPageViewModel[]> {
+    return this.http.get<QuizMainPageViewModel[]>(
+      `${environment.apiUrl}/quizzes/my-quizzes`
+    );
+  }
 }

@@ -37,6 +37,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'my-quizzes',
+    loadChildren: () =>
+      import('../app/features/my-quizzes/my-quizzes.module').then(
+        (m) => m.MyQuizzesModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./features/not-found/not-found.module').then(

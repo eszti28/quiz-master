@@ -17,6 +17,10 @@ export class HeaderComponent {
     this.router.navigate(['/make-quiz']);
   }
 
+  getQuizzesById(): void {
+    this.router.navigate(['/my-quizzes']);
+  }
+
   logout(): void {
     this.authenticationService.logout();
   }
