@@ -48,4 +48,10 @@ export const userRepository = {
 
     return userPoints[0];
   },
+
+  async updateUserPoints(points: number, userId: number): Promise<void> {
+    const query: string = `UPDATE users SET points = points + ? WHERE id = ?;`;
+
+    await db.query<OkPacket>(query, [points.toString(), userId.toString()]);
+  },
 };

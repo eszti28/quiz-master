@@ -11,4 +11,6 @@ userRouter.get('/my-quizzes', userController.getQuizzesByUserId);
 
 userRouter.get('/points', userController.getUserPoints);
 
+userRouter.put('/points', userController.updateUserPoints);
+
 export default userRouter;

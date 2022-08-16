@@ -112,4 +112,17 @@ export const userController = {
       next(err);
     }
   },
+
+  async updateUserPoints(req: Request, res: Response, next: NextFunction) {
+    const { points } = req.body;
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
+
+    try {
+      await userService.updateUserPoints(points, userId);
+      res.status(200).send();
+    } catch (err) {
+      next(err);
+    }
+  },
 };

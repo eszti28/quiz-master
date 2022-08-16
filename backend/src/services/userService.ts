@@ -70,4 +70,8 @@ export const userService = {
   async getUserPoints(userId: number): Promise<UserPointsDomainModel> {
     return await userRepository.getUserPoints(userId);
   },
+
+  async updateUserPoints(points: number, userId: number): Promise<void> {
+    await userRepository.updateUserPoints(points, userId);
+  },
 };
