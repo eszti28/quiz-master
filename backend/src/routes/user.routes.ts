@@ -7,4 +7,8 @@ userRouter.post('/register', userController.register);
 
 userRouter.post('/login', userController.login);
 
+userRouter.get('/my-quizzes', userController.getQuizzesByUserId);
+
+userRouter.get('/points', userController.getUserPoints);
+
 export default userRouter;

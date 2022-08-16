@@ -1,6 +1,8 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connections';
+import { QuizMainPageDomainModel } from '../models/domain/QuizMainPageDomainModel';
 import { UserDomainModel } from '../models/domain/UserDomainModel';
+import { UserPointsDomainModel } from '../models/domain/UserPointsDomainModel';
 
 export const userRepository = {
   async getUserByName(username: string): Promise<UserDomainModel> {
@@ -24,5 +26,26 @@ export const userRepository = {
     ]);
 
     return registrationResult.insertId;
+  },
+
+  async getQuizzesByUserId(userId: number): Promise<QuizMainPageDomainModel[]> {
+    const query: string = `SELECT titles.id AS id, title, category, users.userName AS userName from titles 
+    JOIN users ON titles.userId = users.id
+    WHERE titles.userId = ?
+    ORDER BY titles.id DESC;`;
+
+    return await db.query<QuizMainPageDomainModel[]>(query, [
+      userId.toString(),
+    ]);
+  },
+
+  async getUserPoints(userId: number): Promise<UserPointsDomainModel> {
+    const query: string = `SELECT points FROM users WHERE id = ?;`;
+
+    const userPoints = await db.query<UserPointsDomainModel[]>(query, [
+      userId.toString(),
+    ]);
+
+    return userPoints[0];
   },
 };

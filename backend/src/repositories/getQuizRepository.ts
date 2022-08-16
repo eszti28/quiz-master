@@ -54,15 +54,4 @@ export const getQuizRepository = {
 
     return answerIdResult[0].correctAnswer;
   },
-
-  async getQuizzesByUserId(userId: number): Promise<QuizMainPageDomainModel[]> {
-    const query: string = `SELECT titles.id AS id, title, category, users.userName AS userName from titles 
-    JOIN users ON titles.userId = users.id
-    WHERE titles.userId = ?
-    ORDER BY titles.id DESC;`;
-
-    return await db.query<QuizMainPageDomainModel[]>(query, [
-      userId.toString(),
-    ]);
-  },
 };

@@ -4,6 +4,7 @@ import { UserRegistrationRequestModel } from '../models/request/UserRegistration
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
 import { UserRegistrationViewModel } from '../models/view/UserRegistrationViewModel';
 import { badRequestError } from '../services/generalErrorService';
+import { jwtService } from '../services/jwtService';
 import { userService } from '../services/userService';
 
 export const userController = {
@@ -85,6 +86,30 @@ export const userController = {
       response.status(200).send(user);
     } catch (error) {
       next(error);
+    }
+  },
+
+  async getQuizzesByUserId(req: Request, res: Response, next: NextFunction) {
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
+
+    try {
+      const quizzesById = await userService.getQuizzesByUserId(userId);
+      res.status(200).send(quizzesById);
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async getUserPoints(req: Request, res: Response, next: NextFunction) {
+    const token = jwtService.getTokenFromRequest(req);
+    const { userId } = jwtService.getTokenPayload(token);
+
+    try {
+      const userPoints = await userService.getUserPoints(userId);
+      res.status(200).send(userPoints);
+    } catch (err) {
+      next(err);
     }
   },
 };

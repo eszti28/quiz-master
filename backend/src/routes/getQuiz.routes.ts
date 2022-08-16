@@ -7,6 +7,4 @@ getQuizRouter.get('/main-info', quizController.getMainInfo);
 
 getQuizRouter.get('/category/:category', quizController.getQuizzesByCategory);
 
-getQuizRouter.get('/my-quizzes', quizController.getQuizzesByUserId);
-
 export default getQuizRouter;

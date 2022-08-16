@@ -6,6 +6,7 @@ import {
 } from '../services/generalErrorService';
 import { jwtService } from '../services/jwtService';
 import { quizService } from '../services/quizService';
+import { userService } from '../services/userService';
 
 export const quizController = {
   async addNewTitle(req: Request, res: Response, next: NextFunction) {
@@ -130,18 +131,6 @@ export const quizController = {
     try {
       const answerInfo = await quizService.isAnswerCorrect(parseInt(answerId));
       res.status(200).send(`${answerInfo}`);
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  async getQuizzesByUserId(req: Request, res: Response, next: NextFunction) {
-    const token = jwtService.getTokenFromRequest(req);
-    const { userId } = jwtService.getTokenPayload(token);
-
-    try {
-      const quizzesById = await quizService.getQuizzesByUserId(userId);
-      res.status(200).send(quizzesById);
     } catch (err) {
       next(err);
     }
