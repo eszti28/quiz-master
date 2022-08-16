@@ -1,49 +1,49 @@
 <app-header></app-header>
 <div class="main-container">
-  <h2>{{ questionsToTitle[0].title }}</h2>
-  <div class="question" *ngFor="let question of questionsToTitle">
-    <p>{{ question.question }}</p>
-    <div class="answers">
-      <button
-        mat-raised-button
-        (click)="isAnswerCorrect(question.answers[0].id, question.id)"
-        [ngClass]="
-          correctAnswer === question.answers[0].id
-            ? 'correct'
-            : correctAnswer === question.answers[0].id + 1000
-            ? 'incorrect'
-            : ''
-        "
-      >
-        {{ question.answers[0].answer }}
-      </button>
-      <button
-        mat-raised-button
-        (click)="isAnswerCorrect(question.answers[1].id, question.id)"
-        [ngClass]="
-          correctAnswer === question.answers[1].id
-            ? 'correct'
-            : correctAnswer === question.answers[1].id + 1000
-            ? 'incorrect'
-            : ''
-        "
-      >
-        {{ question.answers[1].answer }}
-      </button>
-      <button
-        mat-raised-button
-        (click)="isAnswerCorrect(question.answers[2].id, question.id)"
-        [ngClass]="
-          correctAnswer === question.answers[2].id
-            ? 'correct'
-            : correctAnswer === question.answers[2].id + 1000
-            ? 'incorrect'
-            : ''
-        "
-      >
-        {{ question.answers[2].answer }}
-      </button>
-    </div>
+  <h2>{{ allQuestions[0]?.title }}</h2>
+  <div class="question">
+    <p>{{ oneQuestion?.question }}</p>
+  </div>
+  <div class="answers">
+    <button
+      mat-raised-button
+      (click)="isAnswerCorrect(oneQuestion?.answers[0].id, oneQuestion?.id)"
+      [ngClass]="
+        correctAnswer === oneQuestion?.answers[0].id
+          ? 'correct'
+          : correctAnswer === oneQuestion?.answers[0].id + 1000
+          ? 'incorrect'
+          : ''
+      "
+    >
+      {{ oneQuestion?.answers[0].answer }}
+    </button>
+    <button
+      mat-raised-button
+      (click)="isAnswerCorrect(oneQuestion?.answers[1].id, oneQuestion?.id)"
+      [ngClass]="
+        correctAnswer === oneQuestion?.answers[1].id
+          ? 'correct'
+          : correctAnswer === oneQuestion?.answers[1].id + 1000
+          ? 'incorrect'
+          : ''
+      "
+    >
+      {{ oneQuestion?.answers[1].answer }}
+    </button>
+    <button
+      mat-raised-button
+      (click)="isAnswerCorrect(oneQuestion?.answers[2].id, oneQuestion?.id)"
+      [ngClass]="
+        correctAnswer === oneQuestion?.answers[2].id
+          ? 'correct'
+          : correctAnswer === oneQuestion?.answers[2].id + 1000
+          ? 'incorrect'
+          : ''
+      "
+    >
+      {{ oneQuestion?.answers[2].answer }}
+    </button>
   </div>
   <div class="result">
     <p>{{ scoreResult }}</p>

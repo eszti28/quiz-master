@@ -9,10 +9,12 @@ import { QuestionsAndAnswersViewModel } from 'src/app/shared/models/view/Questio
   styleUrls: ['./play-quiz.component.scss'],
 })
 export class PlayQuizComponent implements OnInit {
-  questionsToTitle: QuestionsAndAnswersViewModel[] = [];
+  allQuestions: QuestionsAndAnswersViewModel[] = [];
   correctAnswer: number = 0;
   currentScore: number = 0;
   scoreResult: string = '';
+  index: number = 0;
+  oneQuestion: QuestionsAndAnswersViewModel;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,8 +24,8 @@ export class PlayQuizComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       this.quizService.playQuiz(params.get('titleId')).subscribe((x) => {
-        console.log(x);
-        this.questionsToTitle = x;
+        this.allQuestions = x;
+        this.oneQuestion = x[0];
       });
     });
   }
@@ -37,13 +39,17 @@ export class PlayQuizComponent implements OnInit {
         this.correctAnswer = answerId + 1000;
       }
 
-      if (
-        questionId ===
-        this.questionsToTitle[this.questionsToTitle.length - 1].id
-      ) {
-        this.scoreResult = `Your score is ${this.currentScore}/${this.questionsToTitle.length}`;
+      if (questionId === this.allQuestions[this.allQuestions.length - 1].id) {
+        this.scoreResult = `Your score is ${this.currentScore}/${this.allQuestions.length}`;
         this.quizService.updateUserPoints(this.currentScore).subscribe();
       }
     });
+
+    setTimeout(() => {
+      if (this.index < this.allQuestions.length - 1) {
+        this.index++;
+        this.oneQuestion = this.allQuestions[this.index];
+      }
+    }, 2500);
   }
 }
