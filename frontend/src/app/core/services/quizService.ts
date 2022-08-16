@@ -83,4 +83,10 @@ export class QuizService {
       points: points,
     });
   }
+
+  deleteQuiz(quizId: number): Observable<void> {
+    return this.http.delete<void>(
+      `${environment.apiUrl}/user/delete-quiz/${quizId}`
+    );
+  }
 }

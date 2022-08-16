@@ -22,4 +22,8 @@ export class MyQuizzesComponent implements OnInit {
       }
     });
   }
+
+  deleteQuiz(quizId: number): void {
+    this.quizService.deleteQuiz(quizId).subscribe();
+  }
 }
