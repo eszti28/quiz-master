@@ -3,6 +3,7 @@ import {
   AbstractControl,
   FormControl,
   FormGroup,
+  FormGroupDirective,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -50,7 +51,7 @@ export class NewQuestionComponent {
     return this.form.get('radioFormControl');
   }
 
-  addQuestion(): void {
+  addQuestion(formDirective: FormGroupDirective): void {
     const result: AnswerAndIsCorrectViewModel[] = [
       {
         answer: this.answerOne.value,
@@ -65,9 +66,13 @@ export class NewQuestionComponent {
         isCorrect: this.radioFormControl.value === '3',
       },
     ];
-    this.quizService.addNewQuestion(this.question.value, result).subscribe();
-    this.snackBarService.showSuccessMessage('Question added');
-    this.form.reset();
+    this.quizService
+      .addNewQuestion(this.question.value, result)
+      .subscribe(() => {
+        this.snackBarService.showSuccessMessage('Question added');
+        this.form.reset();
+        formDirective.resetForm();
+      });
   }
 
   doneQuiz(): void {

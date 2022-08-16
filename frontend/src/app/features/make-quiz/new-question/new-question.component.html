@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="add-question">
   <h2>Add new question</h2>
-  <form [formGroup]="form">
+  <form [formGroup]="form" #formDirective="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Question</mat-label>
       <input matInput placeholder="Question" formControlName="question" />
@@ -42,7 +42,9 @@
     </mat-radio-group>
 
     <div class="buttons">
-      <button mat-raised-button (click)="addQuestion()">Add question</button>
+      <button mat-raised-button (click)="addQuestion(formDirective)">
+        Add question
+      </button>
       <button mat-raised-button (click)="doneQuiz()">I'm done</button>
     </div>
   </form>
