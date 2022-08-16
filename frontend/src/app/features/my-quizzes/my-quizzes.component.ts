@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from 'src/app/core/services/quizService';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
 
 @Component({
@@ -11,7 +12,10 @@ export class MyQuizzesComponent implements OnInit {
   myQuizzes: QuizMainPageViewModel[];
   noQuizzes: string;
 
-  constructor(private quizService: QuizService) {}
+  constructor(
+    private quizService: QuizService,
+    private snackBarService: SnackBarService
+  ) {}
 
   ngOnInit(): void {
     this.quizService.getQuizzesByUserId().subscribe((x) => {
@@ -25,5 +29,6 @@ export class MyQuizzesComponent implements OnInit {
 
   deleteQuiz(quizId: number): void {
     this.quizService.deleteQuiz(quizId).subscribe();
+    this.snackBarService.showSuccessMessage('Deleted');
   }
 }

@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizService.getUserPoints().subscribe((x) => {
-      console.log(x);
       this.userPoints = x.points;
     });
   }

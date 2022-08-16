@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 
 @Component({
   selector: 'app-make-quiz',
@@ -19,7 +20,11 @@ export class MakeQuizComponent {
     selectFormControl: new FormControl('', Validators.required),
   });
 
-  constructor(private quizService: QuizService, private router: Router) {}
+  constructor(
+    private quizService: QuizService,
+    private router: Router,
+    private snackBarService: SnackBarService
+  ) {}
 
   get title(): AbstractControl {
     return this.form.get('title');
@@ -33,6 +38,7 @@ export class MakeQuizComponent {
     this.quizService
       .addNewTitle(this.title, this.selectFormControl)
       .subscribe();
+    this.snackBarService.showSuccessMessage('Title added');
     this.router.navigate(['/make-quiz/new-question']);
   }
 }

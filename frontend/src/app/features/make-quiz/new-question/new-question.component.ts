@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { AnswerAndIsCorrectViewModel } from 'src/app/shared/models/view/AnswerAndIsCorrectViewModel';
 
 @Component({
@@ -23,7 +24,11 @@ export class NewQuestionComponent {
     radioFormControl: new FormControl('', Validators.required),
   });
 
-  constructor(private quizService: QuizService, private router: Router) {}
+  constructor(
+    private quizService: QuizService,
+    private router: Router,
+    private snackBarService: SnackBarService
+  ) {}
 
   get question(): AbstractControl {
     return this.form.get('question');
@@ -61,6 +66,7 @@ export class NewQuestionComponent {
       },
     ];
     this.quizService.addNewQuestion(this.question.value, result).subscribe();
+    this.snackBarService.showSuccessMessage('Question added');
     this.form.reset();
   }
 
