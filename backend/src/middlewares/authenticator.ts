@@ -19,7 +19,7 @@ export default async function getTokenFromRequest(
   }
 
   if (!jwtService.verifyToken(token as string)) {
-    next(forbiddenError('invalid token'));
+    next(unauthorizedError('invalid token'));
     return;
   }
 
@@ -29,9 +29,7 @@ export default async function getTokenFromRequest(
     const userData = await userRepository.getUserByName(userName);
     if (userData.id !== userId) {
       next(
-        unauthorizedError(
-          'This account does not belong to authenticated player',
-        ),
+        forbiddenError('This account does not belong to authenticated player'),
       );
       return;
     }

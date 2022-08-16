@@ -74,11 +74,11 @@ describe('Authorization middleware', () => {
     expect(nextFunction).toHaveBeenCalledWith(apiErrorModel);
   });
 
-  it('invalid token and get 403', async () => {
+  it('invalid token and get 401', async () => {
     //Arrange
     const mockRequest: Partial<Request> = {};
     const mockResponse: Partial<Response> = {};
-    const apiErrorModel = forbiddenError('invalid token');
+    const apiErrorModel = unauthorizedError('invalid token');
     const nextFunction: NextFunction = jest.fn();
     const token = 'YWxhZGRpbjpvcGVuc2VzYW1l';
     jwtService.getTokenFromRequest = jest.fn().mockReturnValue(token);
@@ -103,7 +103,7 @@ describe('Authorization middleware', () => {
     //Arrange
     const mockRequest: Partial<Request> = {};
     const mockResponse: Partial<Response> = {};
-    const apiErrorModel = unauthorizedError(
+    const apiErrorModel = forbiddenError(
       'This account does not belong to authenticated player',
     );
     const token = 'YWxhZGRpbjpvcGVuc2VzYW1l';
