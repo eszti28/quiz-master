@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AnswerAndIsCorrectViewModel } from 'src/app/shared/models/view/AnswerAndIsCorrectViewModel';
 import { QuestionsAndAnswersViewModel } from 'src/app/shared/models/view/QuestionsAndAnswersViewModel';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
+import { UserPointsViewModel } from 'src/app/shared/models/view/UserPointsViewModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -67,7 +68,13 @@ export class QuizService {
 
   getQuizzesByUserId(): Observable<QuizMainPageViewModel[]> {
     return this.http.get<QuizMainPageViewModel[]>(
-      `${environment.apiUrl}/quizzes/my-quizzes`
+      `${environment.apiUrl}/user/my-quizzes`
+    );
+  }
+
+  getUserPoints(): Observable<UserPointsViewModel> {
+    return this.http.get<UserPointsViewModel>(
+      `${environment.apiUrl}/user/points`
     );
   }
 }
