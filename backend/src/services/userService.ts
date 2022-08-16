@@ -74,4 +74,13 @@ export const userService = {
   async updateUserPoints(points: number, userId: number): Promise<void> {
     await userRepository.updateUserPoints(points, userId);
   },
+
+  async deleteUserQuiz(quizId: string, userId: number): Promise<void> {
+    const dbUserId = await userRepository.getUserToQuiz(quizId);
+
+    if (userId !== dbUserId) {
+      throw unauthorizedError("Can't delete another users quiz.");
+    }
+    await userRepository.deleteUserQuiz(quizId);
+  },
 };

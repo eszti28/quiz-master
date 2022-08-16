@@ -13,4 +13,6 @@ userRouter.get('/points', userController.getUserPoints);
 
 userRouter.put('/points', userController.updateUserPoints);
 
+userRouter.delete('/delete/:quizId', userController.deleteUserQuiz);
+
 export default userRouter;

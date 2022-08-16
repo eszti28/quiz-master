@@ -1,5 +1,6 @@
 import { OkPacket } from 'mysql';
 import { db } from '../data/connections';
+import { QuizIdToUserDomainModel } from '../models/domain/QuizIdToUserDomainModel';
 import { QuizMainPageDomainModel } from '../models/domain/QuizMainPageDomainModel';
 import { UserDomainModel } from '../models/domain/UserDomainModel';
 import { UserPointsDomainModel } from '../models/domain/UserPointsDomainModel';
@@ -53,5 +54,19 @@ export const userRepository = {
     const query: string = `UPDATE users SET points = points + ? WHERE id = ?;`;
 
     await db.query<OkPacket>(query, [points.toString(), userId.toString()]);
+  },
+
+  async deleteUserQuiz(quizId: string): Promise<void> {
+    const query: string = `DELETE FROM titles WHERE id = ?;`;
+
+    await db.query<OkPacket>(query, [quizId]);
+  },
+
+  async getUserToQuiz(quizId: string): Promise<number> {
+    const query: string = `SELECT userId FROM titles WHERE id = ?;`;
+
+    const userId = await db.query<QuizIdToUserDomainModel[]>(query, [quizId]);
+
+    return userId[0].userId;
   },
 };
