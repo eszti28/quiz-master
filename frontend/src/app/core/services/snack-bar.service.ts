@@ -24,8 +24,8 @@ export class SnackBarService {
     }
   }
 
-  showSuccessMessage(errorMessage: string): void {
-    this.snackBar.open(errorMessage, this.actionText, {
+  showSuccessMessage(successMessage: string): void {
+    this.snackBar.open(successMessage, this.actionText, {
       duration: this.duration,
       panelClass: ['green-snackbar'],
     });
