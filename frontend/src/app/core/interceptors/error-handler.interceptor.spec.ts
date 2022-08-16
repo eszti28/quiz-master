@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -16,7 +17,11 @@ describe('ErrorHandlerInterceptor', () => {
     ]);
     // authServiceSpy = jasmine.createSpyObj('authService', ['logout']);
     TestBed.configureTestingModule({
-      imports: [MatSnackBarModule, RouterTestingModule],
+      imports: [
+        MatSnackBarModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+      ],
       providers: [
         ErrorHandlerInterceptor,
         { provide: SnackBarService, useValue: snackBarServiceSpy },

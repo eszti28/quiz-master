@@ -9,3 +9,15 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.green-snackbar,
+.green-snackbar .mat-simple-snackbar-action {
+  color: white;
+  background-color: green;
+}
+
+.red-snackbar,
+.red-snackbar .mat-simple-snackbar-action {
+  color: white;
+  background-color: red;
+}

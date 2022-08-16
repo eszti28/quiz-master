@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MyQuizzesComponent } from './my-quizzes.component';
 
@@ -8,9 +10,9 @@ describe('MyQuizzesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MyQuizzesComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, MatSnackBarModule],
+      declarations: [MyQuizzesComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
