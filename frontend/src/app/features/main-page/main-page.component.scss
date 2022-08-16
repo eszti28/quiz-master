@@ -5,7 +5,7 @@
     font-size: 35px;
     margin: 30px 0;
     padding: 20px 40px;
-    background-color: yellow;
+    background-color: #fdfd96;
   }
 }
 
@@ -64,14 +64,14 @@
   span {
     margin: 0 15px;
     padding: 10px;
-    border: 3px solid yellow;
+    border: 3px solid #fdfd96;
     border-radius: 20px;
     background-color: black;
     color: white;
     cursor: pointer;
     &:hover {
       border: 3px solid;
-      background-color: yellow;
+      background-color: #fdfd96;
       color: black;
     }
   }
