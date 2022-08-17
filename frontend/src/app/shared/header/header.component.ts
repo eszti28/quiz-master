@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { QuizService } from 'src/app/core/services/quizService';
 
 @Component({
   selector: 'app-header',

@@ -39,23 +39,23 @@ export const userService = {
   async login(
     userData: UserLoginRequestViewModel,
   ): Promise<UserLoginViewModel> {
-    const playerData = await userRepository.getUserByName(userData.username);
+    const user = await userRepository.getUserByName(userData.username);
     if (
-      !playerData ||
-      !passwordService.comparePasswords(userData.password, playerData.password)
+      !user ||
+      !passwordService.comparePasswords(userData.password, user.password)
     ) {
       throw unauthorizedError('Username or password is incorrect!');
     }
 
-    const token: string = jwtService.generateAccessToken(
-      playerData.id,
-      playerData.userName,
+    const token: string = await jwtService.generateAccessToken(
+      user.id,
+      user.userName,
     );
 
     return {
       token,
       username: userData.username,
-      points: playerData.points,
+      points: user.points,
     };
   },
 

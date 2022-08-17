@@ -106,6 +106,11 @@ export const userController = {
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
 
+    if (!points) {
+      next(badRequestError('Points is required'));
+      return;
+    }
+
     try {
       await userService.updateUserPoints(points, userId);
       res.status(200).send();
@@ -118,6 +123,11 @@ export const userController = {
     const { quizId } = req.params;
     const token = jwtService.getTokenFromRequest(req);
     const { userId } = jwtService.getTokenPayload(token);
+
+    if (!quizId) {
+      next(badRequestError('quiz id is required'));
+      return;
+    }
 
     try {
       await userService.deleteUserQuiz(quizId, userId);
