@@ -15,6 +15,7 @@ describe('userService', () => {
       username: 'Valaki',
       password: '12345678',
       email: 'newwm@gmail.com',
+      admin: '1',
     };
 
     const user = {
@@ -42,6 +43,7 @@ describe('userService', () => {
       'Valaki',
       'newwm@gmail.com',
       'abcdefu12345',
+      '1',
     );
   });
 
@@ -51,6 +53,7 @@ describe('userService', () => {
       username: 'Valaki',
       password: '12345678',
       email: 'newwm@gmail.com',
+      admin: '0',
     };
 
     //Arrange
@@ -166,7 +169,7 @@ describe('userService', () => {
       .mockResolvedValue(userQuizzes);
 
     //Act
-    const quizzesByUserId = await userService.getQuizzesByUserId(3);
+    const quizzesByUserId = await userService.getQuizzesByUserId(3, 0);
 
     //Assert
     expect(quizzesByUserId).toEqual(userQuizzes);
@@ -192,7 +195,7 @@ describe('userService', () => {
     userRepository.deleteUserQuiz = jest.fn();
 
     //Act
-    await userService.deleteUserQuiz('15', 3);
+    await userService.deleteUserQuiz('15', 3, 0);
 
     //Assert
     expect(userRepository.getUserToQuiz).toHaveBeenCalledTimes(1);
@@ -209,7 +212,7 @@ describe('userService', () => {
 
     try {
       //Act
-      await userService.deleteUserQuiz('15', 3);
+      await userService.deleteUserQuiz('15', 3, 0);
     } catch (err) {
       //Assert
       expect(err).toEqual(apiError);

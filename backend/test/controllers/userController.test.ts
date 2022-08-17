@@ -54,6 +54,7 @@ describe('POST /api/user/register', () => {
       username: 'Eszti',
       password: '12345678',
       email: 'tike@gmail.com',
+      admin: '1',
     };
 
     userService.register = jest.fn();
