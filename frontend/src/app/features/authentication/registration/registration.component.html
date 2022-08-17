@@ -37,6 +37,14 @@
           >Please enter a valid email address
         </mat-error>
       </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Are you an admin?</mat-label>
+        <mat-select formControlName="admin">
+          <mat-option>--</mat-option>
+          <mat-option value="1"> Yes </mat-option>
+          <mat-option value="0"> No </mat-option>
+        </mat-select>
+      </mat-form-field>
       <br />
       <div class="button-container">
         <div class="sign-up">

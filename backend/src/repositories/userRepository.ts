@@ -16,7 +16,7 @@ export const userRepository = {
     username: string,
     email: string,
     password: string,
-    admin: number,
+    admin: string,
   ): Promise<number> {
     const registrationQuery: string = `INSERT INTO users (userName, email, password, admin) VALUES (?, ?, ?, ?)`;
 
@@ -24,7 +24,7 @@ export const userRepository = {
       username,
       email,
       password,
-      admin.toString(),
+      admin,
     ]);
 
     return registrationResult.insertId;

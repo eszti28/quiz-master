@@ -25,6 +25,7 @@ export class RegistrationComponent {
       Validators.required,
       Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
     ]),
+    admin: new FormControl('', Validators.required),
   });
 
   get username(): AbstractControl {
@@ -37,6 +38,10 @@ export class RegistrationComponent {
 
   get email(): AbstractControl {
     return this.form.get('email');
+  }
+
+  get admin(): AbstractControl {
+    return this.form.get('admin');
   }
 
   signUp(): void {

@@ -42,14 +42,9 @@ export class AuthenticationService {
     localStorage.clear();
   }
 
-  registerUser(
-    userdata: UserRegistrationRequestModel
-  ): Observable<UserRegistrationViewModel> {
+  registerUser(userdata: UserRegistrationRequestModel): Observable<void> {
     return this.http
-      .post<UserRegistrationViewModel>(
-        `${environment.apiUrl}/user/register`,
-        userdata
-      )
+      .post<void>(`${environment.apiUrl}/user/register`, userdata)
       .pipe(
         tap(() => {
           this.router.navigate(['/login']);
