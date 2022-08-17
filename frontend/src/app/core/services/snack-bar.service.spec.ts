@@ -1,4 +1,3 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -9,8 +8,9 @@ describe('SnackBarService', () => {
   let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(() => {
+    snackBarSpy = jasmine.createSpyObj('snackBar', ['open']);
     TestBed.configureTestingModule({
-      imports: [MatSnackBarModule, HttpClientTestingModule],
+      imports: [MatSnackBarModule],
       providers: [{ provide: MatSnackBar, useValue: snackBarSpy }],
     });
     service = TestBed.inject(SnackBarService);

@@ -1,13 +1,17 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
+import { QuizService } from 'src/app/core/services/quizService';
 
 import { NewQuestionComponent } from './new-question.component';
 
 describe('NewQuestionComponent', () => {
   let component: NewQuestionComponent;
   let fixture: ComponentFixture<NewQuestionComponent>;
+  let quizServiceSpy: jasmine.SpyObj<QuizService>;
+  let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -15,6 +19,7 @@ describe('NewQuestionComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         MatSnackBarModule,
+        ReactiveFormsModule,
       ],
       declarations: [NewQuestionComponent],
     }).compileComponents();
@@ -23,7 +28,6 @@ describe('NewQuestionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NewQuestionComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
