@@ -9,17 +9,14 @@ import { QuizService } from 'src/app/core/services/quizService';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  userPoints: number;
+  userPoints: string;
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private quizService: QuizService
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
-    this.quizService.getUserPoints().subscribe((x) => {
-      this.userPoints = x.points;
-    });
+    this.userPoints = this.authenticationService.getUserPoints();
   }
 
   makeQuiz(): void {

@@ -72,12 +72,6 @@ export class QuizService {
     );
   }
 
-  getUserPoints(): Observable<UserPointsViewModel> {
-    return this.http.get<UserPointsViewModel>(
-      `${environment.apiUrl}/user/points`
-    );
-  }
-
   updateUserPoints(points: number): Observable<void> {
     return this.http.put<void>(`${environment.apiUrl}/user/points`, {
       points: points,

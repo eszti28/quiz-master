@@ -6,7 +6,6 @@ import {
 } from '../services/generalErrorService';
 import { jwtService } from '../services/jwtService';
 import { quizService } from '../services/quizService';
-import { userService } from '../services/userService';
 
 export const quizController = {
   async addNewTitle(req: Request, res: Response, next: NextFunction) {

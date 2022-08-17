@@ -101,18 +101,6 @@ export const userController = {
     }
   },
 
-  async getUserPoints(req: Request, res: Response, next: NextFunction) {
-    const token = jwtService.getTokenFromRequest(req);
-    const { userId } = jwtService.getTokenPayload(token);
-
-    try {
-      const userPoints = await userService.getUserPoints(userId);
-      res.status(200).send(userPoints);
-    } catch (err) {
-      next(err);
-    }
-  },
-
   async updateUserPoints(req: Request, res: Response, next: NextFunction) {
     const { points } = req.body;
     const token = jwtService.getTokenFromRequest(req);

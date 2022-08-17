@@ -1,10 +1,8 @@
 import { UserLoginRequestViewModel } from '../models/common/UserLoginRequestViewModel';
 import { QuizMainPageDomainModel } from '../models/domain/QuizMainPageDomainModel';
-import { UserPointsDomainModel } from '../models/domain/UserPointsDomainModel';
 import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
 import { UserRegistrationViewModel } from '../models/view/UserRegistrationViewModel';
-import { getQuizRepository } from '../repositories/getQuizRepository';
 import { userRepository } from '../repositories/userRepository';
 import { conflictError, unauthorizedError } from './generalErrorService';
 import { jwtService } from './jwtService';
@@ -26,6 +24,7 @@ export const userService = {
       hashedPassword,
     );
 
+    //token generálás nem szükséges, és majd controllerben nem küldünk vissza semmit
     const token: string = jwtService.generateAccessToken(
       newUserId,
       userData.username,
@@ -56,6 +55,7 @@ export const userService = {
     return {
       token,
       username: userData.username,
+      points: playerData.points,
     };
   },
 
@@ -65,10 +65,6 @@ export const userService = {
 
   async getQuizzesByUserId(userId: number): Promise<QuizMainPageDomainModel[]> {
     return await userRepository.getQuizzesByUserId(userId);
-  },
-
-  async getUserPoints(userId: number): Promise<UserPointsDomainModel> {
-    return await userRepository.getUserPoints(userId);
   },
 
   async updateUserPoints(points: number, userId: number): Promise<void> {

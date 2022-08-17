@@ -22,12 +22,20 @@ export class AuthenticationService {
     localStorage.setItem('token', token);
   }
 
-  getUsername(): void {
-    localStorage.getItem('username') as string;
+  getUsername(): string {
+    return localStorage.getItem('username') as string;
   }
 
   setUsername(username: string): void {
     localStorage.setItem('username', username);
+  }
+
+  getUserPoints(): string {
+    return localStorage.getItem('points') as string;
+  }
+
+  setUserPoints(points: string): void {
+    localStorage.setItem('points', points);
   }
 
   clearLocalStorage(): void {
@@ -57,6 +65,7 @@ export class AuthenticationService {
         tap((response) => {
           this.setToken(response.token);
           this.setUsername(response.username);
+          this.setUserPoints(response.points.toString());
           this.router.navigate(['/quizzes']);
         }),
         mapTo(undefined)
