@@ -13,10 +13,12 @@ export const userController = {
     res: Response<UserRegistrationViewModel>,
     next: NextFunction,
   ) {
-    const { username, password, email } = req.body;
+    const { username, password, email, admin } = req.body;
 
-    if (!username && !password && !email) {
-      next(badRequestError('Username, password and email are required.'));
+    if (!username && !password && !email && !admin) {
+      next(
+        badRequestError('Username, password, admin and email are required.'),
+      );
       return;
     }
 
@@ -35,6 +37,11 @@ export const userController = {
       return;
     }
 
+    if (!admin) {
+      next(badRequestError('Admin is required.'));
+      return;
+    }
+
     if (password.length < 8) {
       next(badRequestError('Password must be 8 characters.'));
       return;
@@ -44,6 +51,7 @@ export const userController = {
       username,
       password,
       email,
+      admin,
     };
 
     try {

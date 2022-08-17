@@ -16,13 +16,15 @@ export const userRepository = {
     username: string,
     email: string,
     password: string,
+    admin: number,
   ): Promise<number> {
-    const registrationQuery: string = `INSERT INTO users (userName, email, password) VALUES (?, ?, ?)`;
+    const registrationQuery: string = `INSERT INTO users (userName, email, password, admin) VALUES (?, ?, ?, ?)`;
 
     const registrationResult = await db.query<OkPacket>(registrationQuery, [
       username,
       email,
       password,
+      admin.toString(),
     ]);
 
     return registrationResult.insertId;

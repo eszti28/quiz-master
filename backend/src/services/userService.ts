@@ -20,6 +20,7 @@ export const userService = {
       userData.username,
       userData.email,
       hashedPassword,
+      userData.admin,
     );
   },
 
