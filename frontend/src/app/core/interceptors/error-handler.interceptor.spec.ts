@@ -2,20 +2,20 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
-// import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { SnackBarService } from '../services/snack-bar.service';
 
 import { ErrorHandlerInterceptor } from './error-handler.interceptor';
 
 describe('ErrorHandlerInterceptor', () => {
   let snackBarServiceSpy: jasmine.SpyObj<SnackBarService>;
-  // let authServiceSpy: jasmine.SpyObj<AuthenticationService>;
+  let authServiceSpy: jasmine.SpyObj<AuthenticationService>;
 
   beforeEach(() => {
     snackBarServiceSpy = jasmine.createSpyObj('snackBarService', [
       'showErrorMessage',
     ]);
-    // authServiceSpy = jasmine.createSpyObj('authService', ['logout']);
+    authServiceSpy = jasmine.createSpyObj('authService', ['logout']);
     TestBed.configureTestingModule({
       imports: [
         MatSnackBarModule,
@@ -25,7 +25,7 @@ describe('ErrorHandlerInterceptor', () => {
       providers: [
         ErrorHandlerInterceptor,
         { provide: SnackBarService, useValue: snackBarServiceSpy },
-        // { provide: AuthenticationService, useValue: authServiceSpy },
+        { provide: AuthenticationService, useValue: authServiceSpy },
       ],
     });
   });

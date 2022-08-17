@@ -5,7 +5,6 @@ import { Observable, tap, mapTo, catchError, of } from 'rxjs';
 import { UserLoginRequestViewModel } from 'src/app/shared/models/request/UserLoginRequestViewModel';
 import { UserRegistrationRequestModel } from 'src/app/shared/models/request/UserRegistrationRequestModel';
 import { UserLoginViewModel } from 'src/app/shared/models/view/UserLoginViewModel';
-import { UserRegistrationViewModel } from 'src/app/shared/models/view/UserRegistrationViewModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

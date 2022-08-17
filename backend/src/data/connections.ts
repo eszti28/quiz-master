@@ -1,4 +1,4 @@
-import mysql, { OkPacket } from 'mysql';
+import mysql from 'mysql';
 import config from '../config';
 
 const databaseConnection = mysql.createConnection({
