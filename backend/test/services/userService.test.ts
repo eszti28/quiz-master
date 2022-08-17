@@ -1,5 +1,6 @@
 import { UserLoginRequestViewModel } from '../../src/models/common/UserLoginRequestViewModel';
 import { UserLoginViewModel } from '../../src/models/view/UserLoginViewModel';
+import { getQuizRepository } from '../../src/repositories/getQuizRepository';
 import { userRepository } from '../../src/repositories/userRepository';
 import {
   conflictError,
@@ -16,12 +17,6 @@ describe('userService', () => {
       password: '12345678',
       email: 'newwm@gmail.com',
       admin: '1',
-    };
-
-    const user = {
-      token: 'asdasdasg3654684651651',
-      userName: 'Valaki',
-      admin: 0,
     };
 
     //Arrange
@@ -81,6 +76,7 @@ describe('userService', () => {
       email: 'eszti@gmail.com',
       password: '12345678',
       points: 15,
+      admin: 0,
     };
 
     const user: UserLoginViewModel = {
@@ -177,6 +173,34 @@ describe('userService', () => {
     expect(userRepository.getQuizzesByUserId).toHaveBeenCalledWith(3);
   });
 
+  it('get all users quizzes if user is admin', async () => {
+    const userQuizzes = [
+      {
+        id: 1,
+        title: 'valami',
+        category: 'Sport',
+        userName: 'Solya',
+      },
+      {
+        id: 2,
+        title: 'valami2',
+        category: 'Sport',
+        userName: 'Eszti',
+      },
+    ];
+    //Arrange
+    getQuizRepository.getQuizMainInfo = jest
+      .fn()
+      .mockResolvedValue(userQuizzes);
+
+    //Act
+    const quizzesByAdmin = await userService.getQuizzesByUserId(3, 1);
+
+    //Assert
+    expect(quizzesByAdmin).toEqual(userQuizzes);
+    expect(getQuizRepository.getQuizMainInfo).toHaveBeenCalledTimes(1);
+  });
+
   it('update user points', async () => {
     //Arrange
     userRepository.updateUserPoints = jest.fn();
@@ -220,5 +244,19 @@ describe('userService', () => {
       expect(userRepository.getUserToQuiz).toHaveBeenCalledWith('15');
       expect(userRepository.deleteUserQuiz).toHaveBeenCalledTimes(0);
     }
+  });
+
+  it('admin deletes quiz without userId check', async () => {
+    //Arrange
+    userRepository.deleteUserQuiz = jest.fn();
+    userRepository.getUserToQuiz = jest.fn().mockReturnValue(5);
+
+    //Act
+    await userService.deleteUserQuiz('15', 3, 1);
+
+    //Assert
+    expect(userRepository.getUserToQuiz).toHaveBeenCalledTimes(0);
+    expect(userRepository.deleteUserQuiz).toHaveBeenCalledTimes(1);
+    expect(userRepository.deleteUserQuiz).toHaveBeenCalledWith('15');
   });
 });

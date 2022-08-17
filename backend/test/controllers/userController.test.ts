@@ -9,7 +9,7 @@ describe('POST /api/user/register', () => {
     console.error = jest.fn();
   });
 
-  it('Error code 400 when neither username, email nor password is provided', async () => {
+  it('Error code 400 when neither username, admin, email nor password is provided', async () => {
     const result = await request(app).post('/api/user/register').send({});
 
     expect(result.statusCode).toEqual(400);
@@ -27,6 +27,18 @@ describe('POST /api/user/register', () => {
     const result = await request(app)
       .post('/api/user/register')
       .send({ password: 12345678, email: 'eszti@gmail.com' });
+
+    expect(result.statusCode).toEqual(400);
+  });
+
+  it('Error code 400 when admin is not provided', async () => {
+    const result = await request(app)
+      .post('/api/user/register')
+      .send({
+        username: 'eszti',
+        password: 12345678,
+        email: 'eszti@gmail.com',
+      });
 
     expect(result.statusCode).toEqual(400);
   });
