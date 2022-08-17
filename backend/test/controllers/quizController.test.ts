@@ -76,6 +76,7 @@ describe('add new title make-quiz/title', () => {
   const tokenData = {
     userId: 3,
     userName: 'Eszti',
+    admin: 1,
   };
 
   const titleData = {
@@ -126,6 +127,7 @@ describe('add new question make-quiz/new-question', () => {
   const tokenData = {
     userId: 3,
     userName: 'Eszti',
+    admin: 1,
   };
 
   const rigthQuestionData = {
@@ -206,6 +208,7 @@ describe('get question to title', () => {
   const tokenData = {
     userId: 3,
     userName: 'Eszti',
+    admin: 1,
   };
 
   const userData = {
@@ -289,6 +292,7 @@ describe('check if answer is correct', () => {
   const tokenData = {
     userId: 3,
     userName: 'Eszti',
+    admin: 1,
   };
 
   const userData = {

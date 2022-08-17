@@ -16,6 +16,7 @@ describe('Authorization middleware', () => {
     const tokenData = {
       userId: 1,
       userName: 'Eszti',
+      admin: 0,
     };
 
     const userData = {

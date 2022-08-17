@@ -4,10 +4,11 @@ import { Request } from 'express';
 import { JwtTokenPayloadModel } from '../models/common/JwtTokenPayloadModel';
 
 export const jwtService = {
-  generateAccessToken(userId: number, userName: string): string {
+  generateAccessToken(userId: number, userName: string, admin: number): string {
     const payLoad = {
       userId: userId,
       userName: userName,
+      admin: admin,
     };
 
     return jwt.sign(payLoad, config.jwt.secretKey as string, {

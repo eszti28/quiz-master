@@ -20,6 +20,7 @@ describe('userService', () => {
     const user = {
       token: 'asdasdasg3654684651651',
       userName: 'Valaki',
+      admin: 0,
     };
 
     //Arrange
@@ -31,10 +32,9 @@ describe('userService', () => {
       .mockReturnValue('asdasdasg3654684651651');
 
     //Act
-    const result = await userService.register(userData);
+    await userService.register(userData);
 
     //Assert
-    expect(result).toEqual(user);
     expect(userRepository.getUserByName).toHaveBeenCalledTimes(1);
     expect(userRepository.getUserByName).toHaveBeenCalledWith('Valaki');
     expect(userRepository.registerUser).toHaveBeenCalledTimes(1);

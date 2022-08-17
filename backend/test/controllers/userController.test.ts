@@ -119,6 +119,7 @@ describe('GET /api/user/my-quizzes', () => {
   const tokenData = {
     userId: 3,
     userName: 'Eszti',
+    admin: 0,
   };
 
   const userData = {
@@ -167,6 +168,7 @@ describe('PUT /api/user/points', () => {
   const tokenData = {
     userId: 3,
     userName: 'Eszti',
+    admin: 0,
   };
 
   const userData = {
@@ -209,6 +211,7 @@ describe('DELETE /api/user/delete/:quizId', () => {
   const tokenData = {
     userId: 3,
     userName: 'Eszti',
+    admin: 0,
   };
 
   const userData = {

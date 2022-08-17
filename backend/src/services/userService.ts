@@ -2,38 +2,25 @@ import { UserLoginRequestViewModel } from '../models/common/UserLoginRequestView
 import { QuizMainPageDomainModel } from '../models/domain/QuizMainPageDomainModel';
 import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
-import { UserRegistrationViewModel } from '../models/view/UserRegistrationViewModel';
+import { getQuizRepository } from '../repositories/getQuizRepository';
 import { userRepository } from '../repositories/userRepository';
 import { conflictError, unauthorizedError } from './generalErrorService';
 import { jwtService } from './jwtService';
 import { passwordService } from './passwordService';
 
 export const userService = {
-  async register(
-    userData: UserRegistrationRequestModel,
-  ): Promise<UserRegistrationViewModel> {
+  async register(userData: UserRegistrationRequestModel): Promise<void> {
     if (await this.checkIfUsernameExists(userData.username)) {
       throw conflictError('Username is already taken.');
     }
 
     const hashedPassword = passwordService.generateHash(userData.password);
 
-    const newUserId = await userRepository.registerUser(
+    await userRepository.registerUser(
       userData.username,
       userData.email,
       hashedPassword,
     );
-
-    //token generálás nem szükséges, és majd controllerben nem küldünk vissza semmit
-    const token: string = jwtService.generateAccessToken(
-      newUserId,
-      userData.username,
-    );
-
-    return {
-      token: token,
-      userName: userData.username,
-    };
   },
 
   async login(
@@ -50,6 +37,7 @@ export const userService = {
     const token: string = await jwtService.generateAccessToken(
       user.id,
       user.userName,
+      user.admin,
     );
 
     return {
@@ -63,8 +51,15 @@ export const userService = {
     return !!(await userRepository.getUserByName(username));
   },
 
-  async getQuizzesByUserId(userId: number): Promise<QuizMainPageDomainModel[]> {
-    return await userRepository.getQuizzesByUserId(userId);
+  async getQuizzesByUserId(
+    userId: number,
+    admin: number,
+  ): Promise<QuizMainPageDomainModel[]> {
+    if (admin === 1) {
+      return await getQuizRepository.getQuizMainInfo();
+    } else {
+      return await userRepository.getQuizzesByUserId(userId);
+    }
   },
 
   async updateUserPoints(points: number, userId: number): Promise<void> {

@@ -4,4 +4,5 @@ export interface UserDomainModel {
   email: string;
   password: string;
   points: number;
+  admin: number;
 }

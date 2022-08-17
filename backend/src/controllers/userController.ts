@@ -47,8 +47,8 @@ export const userController = {
     };
 
     try {
-      const userWithToken = await userService.register(registrationData);
-      res.status(201).send(userWithToken);
+      await userService.register(registrationData);
+      res.status(201).send();
     } catch (err) {
       next(err);
     }
@@ -91,10 +91,10 @@ export const userController = {
 
   async getQuizzesByUserId(req: Request, res: Response, next: NextFunction) {
     const token = jwtService.getTokenFromRequest(req);
-    const { userId } = jwtService.getTokenPayload(token);
+    const { userId, admin } = jwtService.getTokenPayload(token);
 
     try {
-      const quizzesById = await userService.getQuizzesByUserId(userId);
+      const quizzesById = await userService.getQuizzesByUserId(userId, admin);
       res.status(200).send(quizzesById);
     } catch (err) {
       next(err);
