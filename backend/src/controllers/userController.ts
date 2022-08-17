@@ -130,7 +130,7 @@ export const userController = {
   async deleteUserQuiz(req: Request, res: Response, next: NextFunction) {
     const { quizId } = req.params;
     const token = jwtService.getTokenFromRequest(req);
-    const { userId } = jwtService.getTokenPayload(token);
+    const { userId, admin } = jwtService.getTokenPayload(token);
 
     if (!quizId) {
       next(badRequestError('quiz id is required'));
@@ -138,7 +138,7 @@ export const userController = {
     }
 
     try {
-      await userService.deleteUserQuiz(quizId, userId);
+      await userService.deleteUserQuiz(quizId, userId, admin);
       res.status(200).send();
     } catch (err) {
       next(err);
