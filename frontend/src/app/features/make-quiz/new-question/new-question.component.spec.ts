@@ -10,8 +10,6 @@ import { NewQuestionComponent } from './new-question.component';
 describe('NewQuestionComponent', () => {
   let component: NewQuestionComponent;
   let fixture: ComponentFixture<NewQuestionComponent>;
-  let quizServiceSpy: jasmine.SpyObj<QuizService>;
-  let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
