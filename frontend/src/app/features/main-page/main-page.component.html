@@ -3,6 +3,7 @@
   <div class="newest">
     <p>Our newest quiz</p>
     <div
+      *ngIf="newestQuiz"
       class="newest-quiz"
       (click)="addQuizParams(newestQuiz.title, newestQuiz.id)"
     >
@@ -12,6 +13,7 @@
         <span>By {{ newestQuiz?.userName }}</span>
       </div>
     </div>
+    <div *ngIf="noQuizzes">{{ noQuizzes }}</div>
   </div>
   <p class="quizzes-par">Quizzes</p>
   <div class="categories">

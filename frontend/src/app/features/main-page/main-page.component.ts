@@ -13,13 +13,18 @@ export class MainPageComponent implements OnInit {
   newestQuiz: QuizMainPageViewModel;
   imageURL: string;
   CategoryType = CategoryType;
+  noQuizzes: string;
 
   constructor(private router: Router, private quizService: QuizService) {}
 
   ngOnInit(): void {
     this.quizService.getQuizMainInfo().subscribe((x) => {
-      this.newestQuiz = x[0];
-      this.imageURL = `../../../assets/${x[0].category}.png`;
+      if (x.length < 1) {
+        this.noQuizzes = 'No quizzes yet';
+      } else {
+        this.newestQuiz = x[0];
+        this.imageURL = `../../../assets/${x[0].category}.png`;
+      }
     });
   }
 
