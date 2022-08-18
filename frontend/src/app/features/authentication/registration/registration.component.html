@@ -6,7 +6,6 @@
         <mat-label class="username">Username</mat-label>
         <input matInput placeholder="Username" formControlName="username" />
       </mat-form-field>
-      <br />
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input
@@ -15,12 +14,10 @@
           type="password"
           formControlName="password"
         />
-
         <mat-error *ngIf="password?.hasError('minlength')"
           >Password must be 8 characters</mat-error
         >
       </mat-form-field>
-      <br />
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email" />
