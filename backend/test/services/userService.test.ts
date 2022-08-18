@@ -21,6 +21,7 @@ describe('userService', () => {
 
     //Arrange
     userRepository.getUserByName = jest.fn().mockResolvedValue(null);
+    userRepository.getUserByEmail = jest.fn().mockResolvedValue(null);
     passwordService.generateHash = jest.fn().mockReturnValue('abcdefu12345');
     userRepository.registerUser = jest.fn().mockResolvedValue(25);
     jwtService.generateAccessToken = jest
@@ -33,6 +34,10 @@ describe('userService', () => {
     //Assert
     expect(userRepository.getUserByName).toHaveBeenCalledTimes(1);
     expect(userRepository.getUserByName).toHaveBeenCalledWith('Valaki');
+    expect(userRepository.getUserByEmail).toHaveBeenCalledTimes(1);
+    expect(userRepository.getUserByEmail).toHaveBeenCalledWith(
+      'newwm@gmail.com',
+    );
     expect(userRepository.registerUser).toHaveBeenCalledTimes(1);
     expect(userRepository.registerUser).toHaveBeenCalledWith(
       'Valaki',
@@ -55,7 +60,7 @@ describe('userService', () => {
     userService.checkIfUsernameExists = jest.fn().mockReturnValue(true);
     try {
       //Act
-      const result = await userService.register(userData);
+      await userService.register(userData);
     } catch (err) {
       expect(err).toEqual(apiError);
       expect(userRepository.getUserByName).toHaveBeenCalledTimes(1);

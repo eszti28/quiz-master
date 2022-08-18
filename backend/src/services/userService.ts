@@ -14,6 +14,10 @@ export const userService = {
       throw conflictError('Username is already taken.');
     }
 
+    if (await this.checkIfEmailExists(userData.email)) {
+      throw conflictError('Email is already taken.');
+    }
+
     const hashedPassword = passwordService.generateHash(userData.password);
 
     await userRepository.registerUser(
@@ -50,6 +54,10 @@ export const userService = {
 
   async checkIfUsernameExists(username: string): Promise<boolean> {
     return !!(await userRepository.getUserByName(username));
+  },
+
+  async checkIfEmailExists(email: string): Promise<boolean> {
+    return !!(await userRepository.getUserByEmail(email));
   },
 
   async getQuizzesByUserId(

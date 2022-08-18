@@ -12,6 +12,19 @@ export const userRepository = {
     return userList[0];
   },
 
+  async getUserByEmail(email: string): Promise<UserDomainModel> {
+    const query: string = `SELECT 
+                              *
+                            FROM 
+                                users
+                              WHERE
+                                email = ?`;
+
+    const user = await db.query<UserDomainModel[]>(query, [email]);
+
+    return user[0];
+  },
+
   async registerUser(
     username: string,
     email: string,

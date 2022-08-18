@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import app from '../app';
 import { UserLoginRequestViewModel } from '../models/common/UserLoginRequestViewModel';
 import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
