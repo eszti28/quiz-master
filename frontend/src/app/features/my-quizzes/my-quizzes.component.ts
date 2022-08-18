@@ -28,7 +28,9 @@ export class MyQuizzesComponent implements OnInit {
   }
 
   deleteQuiz(quizId: number): void {
-    this.quizService.deleteQuiz(quizId).subscribe();
-    this.snackBarService.showSuccessMessage('Deleted');
+    this.quizService.deleteQuiz(quizId).subscribe(() => {
+      this.snackBarService.showSuccessMessage('Deleted');
+      this.ngOnInit();
+    });
   }
 }

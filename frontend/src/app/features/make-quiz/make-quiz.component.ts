@@ -37,8 +37,9 @@ export class MakeQuizComponent {
   addNewTitle(): void {
     this.quizService
       .addNewTitle(this.title, this.selectFormControl)
-      .subscribe();
-    this.snackBarService.showSuccessMessage('Title added');
+      .subscribe(() => {
+        this.snackBarService.showSuccessMessage('Title added');
+      });
     this.router.navigate(['/make-quiz/new-question']);
   }
 }
