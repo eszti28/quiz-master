@@ -2,47 +2,66 @@
 <div class="main-container">
   <h2>{{ allQuestions[0]?.title }}</h2>
   <div class="question">
-    <p>{{ oneQuestion?.question }}</p>
+    <p>{{ currentQuestion?.question }}</p>
   </div>
+  <!-- <div class="answers">
+    <button
+      mat-raised-button
+      (click)="
+        isAnswerCorrect(currentQuestion?.answers[0].id, currentQuestion?.id)
+      "
+      [ngClass]="
+        correctAnswer === currentQuestion?.answers[0].id
+          ? 'correct'
+          : correctAnswer === currentQuestion?.answers[0].id + 1000
+          ? 'incorrect'
+          : ''
+      "
+    >
+      {{ currentQuestion?.answers[0].answer }}
+    </button>
+    <button
+      mat-raised-button
+      (click)="
+        isAnswerCorrect(currentQuestion?.answers[1].id, currentQuestion?.id)
+      "
+      [ngClass]="
+        correctAnswer === currentQuestion?.answers[1].id
+          ? 'correct'
+          : correctAnswer === currentQuestion?.answers[1].id + 1000
+          ? 'incorrect'
+          : ''
+      "
+    >
+      {{ currentQuestion?.answers[1].answer }}
+    </button>
+    <button
+      mat-raised-button
+      (click)="
+        isAnswerCorrect(currentQuestion?.answers[2].id, currentQuestion?.id)
+      "
+      [ngClass]="
+        correctAnswer === currentQuestion?.answers[2].id
+          ? 'correct'
+          : correctAnswer === currentQuestion?.answers[2].id + 1000
+          ? 'incorrect'
+          : ''
+      "
+    >
+      {{ currentQuestion?.answers[2].answer }}
+    </button>
+  </div> -->
   <div class="answers">
     <button
+      *ngFor="let answer of currentQuestion?.answers"
       mat-raised-button
-      (click)="isAnswerCorrect(oneQuestion?.answers[0].id, oneQuestion?.id)"
-      [ngClass]="
-        correctAnswer === oneQuestion?.answers[0].id
-          ? 'correct'
-          : correctAnswer === oneQuestion?.answers[0].id + 1000
-          ? 'incorrect'
-          : ''
-      "
+      (click)="isAnswerCorrect(answer.id, currentQuestion.id)"
+      [ngClass]="{
+        correct: correctAnswer === answer.id,
+        incorrect: correctAnswer === answer.id + 1000
+      }"
     >
-      {{ oneQuestion?.answers[0].answer }}
-    </button>
-    <button
-      mat-raised-button
-      (click)="isAnswerCorrect(oneQuestion?.answers[1].id, oneQuestion?.id)"
-      [ngClass]="
-        correctAnswer === oneQuestion?.answers[1].id
-          ? 'correct'
-          : correctAnswer === oneQuestion?.answers[1].id + 1000
-          ? 'incorrect'
-          : ''
-      "
-    >
-      {{ oneQuestion?.answers[1].answer }}
-    </button>
-    <button
-      mat-raised-button
-      (click)="isAnswerCorrect(oneQuestion?.answers[2].id, oneQuestion?.id)"
-      [ngClass]="
-        correctAnswer === oneQuestion?.answers[2].id
-          ? 'correct'
-          : correctAnswer === oneQuestion?.answers[2].id + 1000
-          ? 'incorrect'
-          : ''
-      "
-    >
-      {{ oneQuestion?.answers[2].answer }}
+      {{ answer.answer }}
     </button>
   </div>
   <div class="result">

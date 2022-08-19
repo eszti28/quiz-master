@@ -54,10 +54,20 @@ export const userRepository = {
     ]);
   },
 
-  async updateUserPoints(points: number, userId: number): Promise<void> {
+  async updateUserPoints(
+    points: number,
+    userId: number,
+  ): Promise<{ points: number }> {
     const query: string = `UPDATE users SET points = points + ? WHERE id = ?;`;
 
+    const newUserPoints: string = `SELECT points FROM users WHERE id = ?`;
+
     await db.query<OkPacket>(query, [points.toString(), userId.toString()]);
+
+    const userPoints = await db.query<{ points: number }[]>(newUserPoints, [
+      userId.toString(),
+    ]);
+    return userPoints[0];
   },
 
   async deleteUserQuiz(quizId: string): Promise<void> {

@@ -71,8 +71,8 @@ export class QuizService {
     );
   }
 
-  updateUserPoints(points: number): Observable<void> {
-    return this.http.put<void>(`${environment.apiUrl}/user/points`, {
+  updateUserPoints(points: number): Observable<string> {
+    return this.http.put<string>(`${environment.apiUrl}/user/points`, {
       points: points,
     });
   }

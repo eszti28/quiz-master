@@ -121,8 +121,9 @@ export const userController = {
     }
 
     try {
-      await userService.updateUserPoints(points, userId);
-      res.status(200).send();
+      const userPoints = await userService.updateUserPoints(points, userId);
+
+      res.status(200).send(`${userPoints}`);
     } catch (err) {
       next(err);
     }
