@@ -3,6 +3,7 @@ import { db } from '../data/connections';
 import { QuizIdToUserDomainModel } from '../models/domain/QuizIdToUserDomainModel';
 import { QuizMainPageDomainModel } from '../models/domain/QuizMainPageDomainModel';
 import { UserDomainModel } from '../models/domain/UserDomainModel';
+import { UserPointsDomainModel } from '../models/domain/UserPointsDomainModel';
 
 export const userRepository = {
   async getUserByName(username: string): Promise<UserDomainModel> {
@@ -57,14 +58,14 @@ export const userRepository = {
   async updateUserPoints(
     points: number,
     userId: number,
-  ): Promise<{ points: number }> {
+  ): Promise<UserPointsDomainModel> {
     const query: string = `UPDATE users SET points = points + ? WHERE id = ?;`;
 
     const newUserPoints: string = `SELECT points FROM users WHERE id = ?`;
 
     await db.query<OkPacket>(query, [points.toString(), userId.toString()]);
 
-    const userPoints = await db.query<{ points: number }[]>(newUserPoints, [
+    const userPoints = await db.query<UserPointsDomainModel[]>(newUserPoints, [
       userId.toString(),
     ]);
     return userPoints[0];
