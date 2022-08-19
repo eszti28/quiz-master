@@ -30,7 +30,9 @@ export class MainPageComponent implements OnInit {
 
   addCategoryQueryParams(categoryTypeId: number) {
     this.router.navigate(['/quizzes/categories'], {
-      queryParams: { category: `${CategoryType[categoryTypeId]}` },
+      queryParams: {
+        category: `${CategoryType[categoryTypeId]}`,
+      },
     });
   }
 
