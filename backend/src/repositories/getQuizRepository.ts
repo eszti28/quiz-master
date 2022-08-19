@@ -36,9 +36,9 @@ export const getQuizRepository = {
   async getQuestionsToTitle(
     titleId: number,
   ): Promise<QuestionsToTitleDomainModel[]> {
-    const query: string = `SELECT titles.id AS titleId, title, question, answer, quizId AS questionId, answers.id AS answerId from titles 
+    const query: string = `SELECT titles.id AS titleId, title, question, answer, questionId, answers.id AS answerId from titles 
     JOIN questions ON titles.id = questions.titleId
-    JOIN answers ON questions.id = answers.quizId
+    JOIN answers ON questions.id = answers.questionId
     WHERE titleId = ?;`;
     return await db.query<QuestionsToTitleDomainModel[]>(query, [
       titleId.toString(),

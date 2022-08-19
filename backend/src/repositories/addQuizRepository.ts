@@ -29,9 +29,9 @@ export const addQuizRepository = {
   async addAnswersToQuestion(
     correctAnswers: number[],
     answers: string[],
-    quizId: number,
+    questionId: number,
   ): Promise<void> {
-    const query: string = `INSERT INTO answers (correctAnswer, answer, quizId) VALUES 
+    const query: string = `INSERT INTO answers (correctAnswer, answer, questionId) VALUES 
             (?, ?, ?), 
             (?, ?, ?),
             (?, ?, ?);`;
@@ -39,13 +39,13 @@ export const addQuizRepository = {
     await db.query<OkPacket>(query, [
       `${correctAnswers[0]}`,
       answers[0],
-      quizId.toString(),
+      questionId.toString(),
       `${correctAnswers[1]}`,
       answers[1],
-      quizId.toString(),
+      questionId.toString(),
       `${correctAnswers[2]}`,
       answers[2],
-      quizId.toString(),
+      questionId.toString(),
     ]);
   },
 };
