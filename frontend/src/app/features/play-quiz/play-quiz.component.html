@@ -4,53 +4,6 @@
   <div class="question">
     <p>{{ currentQuestion?.question }}</p>
   </div>
-  <!-- <div class="answers">
-    <button
-      mat-raised-button
-      (click)="
-        isAnswerCorrect(currentQuestion?.answers[0].id, currentQuestion?.id)
-      "
-      [ngClass]="
-        correctAnswer === currentQuestion?.answers[0].id
-          ? 'correct'
-          : correctAnswer === currentQuestion?.answers[0].id + 1000
-          ? 'incorrect'
-          : ''
-      "
-    >
-      {{ currentQuestion?.answers[0].answer }}
-    </button>
-    <button
-      mat-raised-button
-      (click)="
-        isAnswerCorrect(currentQuestion?.answers[1].id, currentQuestion?.id)
-      "
-      [ngClass]="
-        correctAnswer === currentQuestion?.answers[1].id
-          ? 'correct'
-          : correctAnswer === currentQuestion?.answers[1].id + 1000
-          ? 'incorrect'
-          : ''
-      "
-    >
-      {{ currentQuestion?.answers[1].answer }}
-    </button>
-    <button
-      mat-raised-button
-      (click)="
-        isAnswerCorrect(currentQuestion?.answers[2].id, currentQuestion?.id)
-      "
-      [ngClass]="
-        correctAnswer === currentQuestion?.answers[2].id
-          ? 'correct'
-          : correctAnswer === currentQuestion?.answers[2].id + 1000
-          ? 'incorrect'
-          : ''
-      "
-    >
-      {{ currentQuestion?.answers[2].answer }}
-    </button>
-  </div> -->
   <div class="answers">
     <button
       *ngFor="let answer of currentQuestion?.answers"
