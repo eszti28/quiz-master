@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
@@ -14,7 +15,8 @@ export class MyQuizzesComponent implements OnInit {
 
   constructor(
     private quizService: QuizService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +26,14 @@ export class MyQuizzesComponent implements OnInit {
       } else {
         this.myQuizzes = x;
       }
+    });
+  }
+
+  newQuestion(quizId: number): void {
+    this.router.navigate(['/make-quiz/new-question'], {
+      queryParams: {
+        quizId: quizId,
+      },
     });
   }
 

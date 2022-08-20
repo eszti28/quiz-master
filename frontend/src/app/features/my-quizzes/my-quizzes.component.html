@@ -12,6 +12,9 @@
         <span>By {{ quiz.userName }}</span>
       </div>
       <div class="del-btn">
+        <button mat-raised-button (click)="newQuestion(quiz.id)">
+          Add new question
+        </button>
         <button mat-raised-button (click)="deleteQuiz(quiz.id)">Delete</button>
       </div>
     </div>

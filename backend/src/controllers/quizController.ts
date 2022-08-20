@@ -42,6 +42,12 @@ export const quizController = {
       isCorrectThree,
     } = req.body;
 
+    let { quizId } = req.params;
+
+    if (!quizId) {
+      quizId = '0';
+    }
+
     if (!question || !answerOne || !answerTwo || !answerThree) {
       next(badRequestError('Every field is required'));
       return;
@@ -69,7 +75,12 @@ export const quizController = {
     }
 
     try {
-      await quizService.addNewQuestion(question, answers, correctAnswers);
+      await quizService.addNewQuestion(
+        parseInt(quizId),
+        question,
+        answers,
+        correctAnswers,
+      );
       res.status(200).send();
     } catch (err) {
       next(err);

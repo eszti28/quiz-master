@@ -16,18 +16,20 @@ export const quizService = {
   },
 
   async addNewQuestion(
+    quizId: number,
     question: string,
     answers: string[],
     correctAnswer: boolean[],
   ): Promise<void> {
-    const maxTitleId: number = await getQuizRepository.getMaxTitleId();
-
-    if (!maxTitleId) {
-      throw notFoundError("There aren't any titles yet");
+    if (quizId === 0) {
+      quizId = await getQuizRepository.getMaxTitleId();
+      if (!quizId) {
+        throw notFoundError("There aren't any titles yet");
+      }
     }
 
     const newQuestionId: GetNewQuestionDomainModel[] =
-      await addQuizRepository.addAndGetNewQuestion(question, maxTitleId);
+      await addQuizRepository.addAndGetNewQuestion(question, quizId);
 
     if (newQuestionId.length < 1) {
       throw notFoundError("There aren't any questions yet");
