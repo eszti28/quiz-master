@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { QuizService } from 'src/app/core/services/quizService';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { QuizMainPageViewModel } from 'src/app/shared/models/view/QuizMainPageViewModel';
 
 @Component({
@@ -16,7 +18,8 @@ export class MyQuizzesComponent implements OnInit {
   constructor(
     private quizService: QuizService,
     private snackBarService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +41,15 @@ export class MyQuizzesComponent implements OnInit {
   }
 
   deleteQuiz(quizId: number): void {
-    this.quizService.deleteQuiz(quizId).subscribe(() => {
-      this.snackBarService.showSuccessMessage('Deleted');
-      this.ngOnInit();
+    const dialog = this.dialog.open(ConfirmDialogComponent);
+
+    dialog.afterClosed().subscribe((x) => {
+      if (x) {
+        this.quizService.deleteQuiz(quizId).subscribe(() => {
+          this.snackBarService.showSuccessMessage('Deleted');
+          this.ngOnInit();
+        });
+      }
     });
   }
 }
