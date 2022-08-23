@@ -208,7 +208,7 @@ describe('userService', () => {
 
   it('update user points', async () => {
     //Arrange
-    userRepository.updateUserPoints = jest.fn();
+    userRepository.updateUserPoints = jest.fn().mockResolvedValue(15);
 
     //Act
     await userService.updateUserPoints(15, 3);

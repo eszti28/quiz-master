@@ -108,14 +108,14 @@ describe('add new question to database', () => {
 
   it('should give question to database', async () => {
     const addNewData = {
+      quizId: 3,
       question: 'Valami question',
       answers: ['one', 'two', 'three'],
       correctAnswer: [true, false, false],
     };
 
     //Arrange
-
-    getQuizRepository.getMaxTitleId = jest.fn().mockReturnValue(20);
+    getQuizRepository.getMaxTitleId = jest.fn();
     addQuizRepository.addAndGetNewQuestion = jest
       .fn()
       .mockReturnValue([{ id: 20 }]);
@@ -123,17 +123,18 @@ describe('add new question to database', () => {
 
     //Act
     await quizService.addNewQuestion(
+      addNewData.quizId,
       addNewData.question,
       addNewData.answers,
       addNewData.correctAnswer,
     );
 
     //Assert
-    expect(getQuizRepository.getMaxTitleId).toHaveBeenCalledTimes(1);
+    expect(getQuizRepository.getMaxTitleId).toHaveBeenCalledTimes(0);
     expect(addQuizRepository.addAndGetNewQuestion).toHaveBeenCalledTimes(1);
     expect(addQuizRepository.addAndGetNewQuestion).toHaveBeenCalledWith(
       addNewData.question,
-      20,
+      3,
     );
     expect(addQuizRepository.addAnswersToQuestion).toHaveBeenCalledTimes(1);
     expect(addQuizRepository.addAnswersToQuestion).toHaveBeenCalledWith(
@@ -145,6 +146,7 @@ describe('add new question to database', () => {
 
   it('should throw error if there are no titles yet', async () => {
     const addNewQuestion = {
+      quizId: 0,
       question: 'Valami question',
       answers: ['one', 'two', 'three'],
       correctAnswer: [true, false, false],
@@ -158,6 +160,7 @@ describe('add new question to database', () => {
     try {
       //Act
       await quizService.addNewQuestion(
+        addNewQuestion.quizId,
         addNewQuestion.question,
         addNewQuestion.answers,
         addNewQuestion.correctAnswer,
@@ -172,6 +175,7 @@ describe('add new question to database', () => {
 
   it('should throw error if there are no questions yet', async () => {
     const addNewQuestion = {
+      quizId: 3,
       question: 'Valami question',
       answers: ['one', 'two', 'three'],
       correctAnswer: [true, false, false],
@@ -186,6 +190,7 @@ describe('add new question to database', () => {
     try {
       //Act
       await quizService.addNewQuestion(
+        addNewQuestion.quizId,
         addNewQuestion.question,
         addNewQuestion.answers,
         addNewQuestion.correctAnswer,
