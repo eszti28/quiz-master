@@ -31,17 +31,15 @@ export const userRepository = {
     email: string,
     password: string,
     admin: string,
-  ): Promise<number> {
+  ): Promise<void> {
     const registrationQuery: string = `INSERT INTO users (userName, email, password, admin) VALUES (?, ?, ?, ?)`;
 
-    const registrationResult = await db.query<OkPacket>(registrationQuery, [
+    await db.query<OkPacket>(registrationQuery, [
       username,
       email,
       password,
       admin,
     ]);
-
-    return registrationResult.insertId;
   },
 
   async getQuizzesByUserId(userId: number): Promise<QuizMainPageDomainModel[]> {

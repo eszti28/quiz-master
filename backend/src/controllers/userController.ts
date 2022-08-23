@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import app from '../app';
 import { UserLoginRequestViewModel } from '../models/common/UserLoginRequestViewModel';
 import { UserRegistrationRequestModel } from '../models/request/UserRegistrationRequestModel';
 import { UserLoginViewModel } from '../models/view/UserLoginViewModel';
@@ -122,7 +121,6 @@ export const userController = {
 
     try {
       const userPoints = await userService.updateUserPoints(points, userId);
-
       res.status(200).send(`${userPoints}`);
     } catch (err) {
       next(err);

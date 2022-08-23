@@ -74,7 +74,6 @@ export const userService = {
   async updateUserPoints(points: number, userId: number): Promise<number> {
     if (points > 0) {
       const userPoints = await userRepository.updateUserPoints(points, userId);
-
       return userPoints.points;
     }
   },
