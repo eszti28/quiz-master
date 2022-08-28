@@ -95,9 +95,9 @@ export const quizService = {
   async isAnswerCorrect(questionId: number): Promise<number> {
     const isCorrect = await getQuizRepository.isAnswerCorrect(questionId);
 
-    // if (isCorrect < 0 || isCorrect > 1) {
-    //   throw badRequestError('Given response is invalid');
-    // }
+    if (isCorrect === null) {
+      throw badRequestError('Given response is invalid');
+    }
 
     return isCorrect;
   },
