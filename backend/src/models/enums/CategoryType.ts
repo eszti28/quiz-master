@@ -3,4 +3,11 @@ export enum CategoryType {
   Movies,
   History,
   Sport,
+  Auto,
+  Music,
+  Literature,
 }
+
+//Auto-motor
+//music
+//literature
