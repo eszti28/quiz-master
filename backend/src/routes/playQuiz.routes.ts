@@ -5,6 +5,6 @@ const playQuizRouter = express.Router();
 
 playQuizRouter.get('/:titleId', quizController.getQuestionsToTitle);
 
-playQuizRouter.get('/isCorrect/:answerId', quizController.isAnswerCorrect);
+playQuizRouter.get('/isCorrect/:questionId', quizController.isAnswerCorrect);
 
 export default playQuizRouter;

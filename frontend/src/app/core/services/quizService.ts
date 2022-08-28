@@ -59,9 +59,9 @@ export class QuizService {
     );
   }
 
-  isAnswerCorrect(answerId: number): Observable<number> {
+  isAnswerCorrect(questionId: number): Observable<number> {
     return this.http.get<number>(
-      `${environment.apiUrl}/play-quiz/isCorrect/${answerId}`
+      `${environment.apiUrl}/play-quiz/isCorrect/${questionId}`
     );
   }
 

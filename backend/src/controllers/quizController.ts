@@ -131,15 +131,17 @@ export const quizController = {
   },
 
   async isAnswerCorrect(req: Request, res: Response, next: NextFunction) {
-    const { answerId } = req.params;
+    const { questionId } = req.params;
 
-    if (!answerId) {
+    if (!questionId) {
       next(notFoundError('Valid answer id required'));
       return;
     }
 
     try {
-      const answerInfo = await quizService.isAnswerCorrect(parseInt(answerId));
+      const answerInfo = await quizService.isAnswerCorrect(
+        parseInt(questionId),
+      );
       res.status(200).send(`${answerInfo}`);
     } catch (err) {
       next(err);

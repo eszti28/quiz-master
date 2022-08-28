@@ -45,13 +45,13 @@ export const getQuizRepository = {
     ]);
   },
 
-  async isAnswerCorrect(answerId: number): Promise<number> {
-    const query: string = `SELECT correctAnswer FROM answers WHERE id = ?;`;
+  async isAnswerCorrect(questionId: number): Promise<number> {
+    const query: string = `SELECT * FROM answers WHERE questionId = ? AND correctAnswer = 1;`;
 
     const answerIdResult = await db.query<IsAnswerCorrectDomainModel[]>(query, [
-      answerId.toString(),
+      questionId.toString(),
     ]);
 
-    return answerIdResult[0].correctAnswer;
+    return answerIdResult[0].id;
   },
 };

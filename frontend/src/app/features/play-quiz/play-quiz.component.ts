@@ -12,6 +12,7 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 export class PlayQuizComponent implements OnInit {
   allQuestions: QuestionsAndAnswersViewModel[] = [];
   correctAnswer: number = 0;
+  wrongAnswer: number = 0;
   currentScore: number = 0;
   scoreResult: string = '';
   index: number = 0;
@@ -33,12 +34,13 @@ export class PlayQuizComponent implements OnInit {
   }
 
   isAnswerCorrect(answerId: number, questionId: number): void {
-    this.quizService.isAnswerCorrect(answerId).subscribe((isCorrect) => {
-      if (isCorrect === 1) {
+    this.quizService.isAnswerCorrect(questionId).subscribe((isCorrect) => {
+      if (isCorrect === answerId) {
         this.correctAnswer = answerId;
         this.currentScore++;
       } else {
-        this.correctAnswer = answerId + 1000;
+        this.correctAnswer = isCorrect;
+        this.wrongAnswer = answerId + 1000;
       }
 
       if (questionId === this.allQuestions[this.allQuestions.length - 1].id) {
@@ -54,6 +56,6 @@ export class PlayQuizComponent implements OnInit {
         this.index++;
         this.currentQuestion = this.allQuestions[this.index];
       }
-    }, 2500);
+    }, 2000);
   }
 }

@@ -11,7 +11,7 @@
       (click)="isAnswerCorrect(answer.id, currentQuestion.id)"
       [ngClass]="{
         correct: correctAnswer === answer.id,
-        incorrect: correctAnswer === answer.id + 1000
+        incorrect: wrongAnswer === answer.id + 1000
       }"
     >
       {{ answer.answer }}
